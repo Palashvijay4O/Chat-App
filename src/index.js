@@ -13,12 +13,18 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+//app.set('view engine', 'html');
 app.use(express.json())
 app.use(express.static(htmlDir))
 
 // app.get('/', async (req, res) => {
 //     res.render('index')
 // })
+
+app.post('/chat.html', async (req, res) => {
+    res.redirect('/chat.html')
+})
+
 
 let count = 0
 

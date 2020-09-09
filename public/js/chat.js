@@ -13,8 +13,9 @@ const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
 
-// Options
-const {username, room } = Qs.parse(location.search, {ignoreQueryPrefix: true})
+
+const username = localStorage.getItem('username')
+const room = localStorage.getItem('room')
 
 const autoScroll = () => {
     // New message element
@@ -41,7 +42,6 @@ const autoScroll = () => {
 }
 
 socket.on('locationMessage', (locationMessage) => {
-    //console.log(locationMessage)
     const html = Mustache.render(locationMessageTemplate, {
         username: locationMessage.username,
         locationMessage: locationMessage.text,
@@ -52,7 +52,6 @@ socket.on('locationMessage', (locationMessage) => {
 })
 
 socket.on('message', (message) => {
-    console.log(message)
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
@@ -104,7 +103,6 @@ $sendLocationButton.addEventListener('click', (event) => {
         const {latitude, longitude} = position.coords
         socket.emit('sendLocation', {latitude, longitude}, (message) => {
             $sendLocationButton.removeAttribute('disabled')
-            console.log(message)
         }) 
     })
 })
