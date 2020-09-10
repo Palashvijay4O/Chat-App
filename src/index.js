@@ -29,7 +29,16 @@ app.post('/chat.html', async (req, res) => {
 let count = 0
 
 io.on('connection', (socket) => {
-    //console.log('New connection')
+    console.log('New connection')
+
+    socket.on('getActiveRooms', (callback) => {
+        rooms =  [{roomName: 'Room #1'}, {roomName: 'Room #2'}]
+        
+        io.emit('roomList', {
+            rooms
+        })
+        callback()
+    })
     
     socket.on('join', ({username, room}, callback) => {
         const {error, user} = addUser({ id: socket.id, username, room})
@@ -43,6 +52,7 @@ io.on('connection', (socket) => {
         socket.emit('message', generateMessage('Admin', 'Welcome to the chat room'))
         // to used for particular users in the room
         socket.broadcast.to(user.room).emit('message', generateMessage(`${user.username} has joined!`))
+        //console.log(getUsersInRoom(user.room))
         io.to(user.room).emit('roomData', {
             room: user.room,
             users: getUsersInRoom(user.room)

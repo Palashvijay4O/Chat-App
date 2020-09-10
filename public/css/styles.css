@@ -181,3 +181,21 @@ button:disabled {
     font-weight: 300;
     padding: 12px 24px 0 24px;
 }
+
+.rooms {
+    list-style-type: none;
+    font-weight: 200;
+    padding: 12px 24px 0 24px;
+}
+
+.room-list {
+    padding: 10px;
+    border: 5px solid;
+    background: white;
+    width: 20em;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+}
