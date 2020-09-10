@@ -1,5 +1,26 @@
 const users = []
 
+
+// Handling rooms logic in this file itself, TODO: Move it to separate utility
+// Logic can be optimized
+
+const rooms = []
+
+const getListOfActiveRooms = () => {
+
+    const activeRooms = rooms.filter((room) => {
+        console.log(room.roomName)
+        var users = getUsersInRoom(room.roomName)
+        console.log(users)
+        if(!users) {
+            return false;
+        }
+        return true
+    })
+
+    return activeRooms
+}
+
 const addUser = ({id, username, room}) => {
     
     // Clean the data
@@ -27,6 +48,15 @@ const addUser = ({id, username, room}) => {
     // Store user
     const user = {id, username, room}
     users.push(user)
+    
+    // Adding the list of all rooms
+    const roomAlreadyActive = rooms.find((room) => {
+        return room.roomName === room
+    })
+    if(!roomAlreadyActive) {
+        rooms.push({roomName: room})
+    }
+
     return {
         user
     }
@@ -58,5 +88,6 @@ module.exports = {
     addUser,
     removeUser,
     getUser,
-    getUsersInRoom
+    getUsersInRoom,
+    getListOfActiveRooms
 }

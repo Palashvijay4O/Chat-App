@@ -4,7 +4,7 @@ const path = require('path')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
-const {addUser, removeUser, getUser, getUsersInRoom} = require('./utils/users')
+const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = require('./utils/users')
 
 const htmlDir = path.join(__dirname, '../public')
 const port = process.env.PORT || 3000
@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
         rooms =  [{roomName: 'Room #1'}, {roomName: 'Room #2'}]
         
         io.emit('roomList', {
-            rooms
+            rooms : getListOfActiveRooms()
         })
         callback()
     })
