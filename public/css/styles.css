@@ -185,7 +185,7 @@ button:disabled {
 .rooms {
     list-style-type: none;
     font-weight: 200;
-    padding: 12px 24px 0 24px;
+    padding-top: 12px;
 }
 
 .room-list {
@@ -198,4 +198,15 @@ button:disabled {
 
 .main-container {
     display: flex;
+}
+
+.room-details {
+    background: lightgreen;
+    border: hidden;
+    border-radius: 5px; 
+    margin-top: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+    box-shadow: 0px 0px 17px 1px lightslategrey;
 }

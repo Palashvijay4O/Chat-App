@@ -9,9 +9,8 @@ const rooms = []
 const getListOfActiveRooms = () => {
 
     const activeRooms = rooms.filter((room) => {
-        //console.log(room.roomName)
+
         var users = getUsersInRoom(room.roomName)
-        //console.log(users)
         if(!users || users.length === 0) {
             return false;
         }
@@ -19,6 +18,42 @@ const getListOfActiveRooms = () => {
     })
 
     return activeRooms
+}
+
+const updateParticipantsCountInRoom = (room, eventType) => {
+    if(eventType === 'create_and_add') {
+        rooms.push({
+            roomName: room,
+            participantsCount: 1
+        })
+    }
+    else if(eventType === 'add') {
+        // TODO : further be reduced to updating the room
+        const existingRoom = rooms.find((room_in) => room_in.roomName === room)
+        existingRoom.participantsCount += 1
+        const index = rooms.findIndex((room_in) => {
+            return room_in.roomName === room
+        })
+    
+        if(index !== -1) {
+            rooms.splice(index, 1)[0]
+        }
+
+        rooms.push(existingRoom)
+    }
+    else if (eventType === 'remove') {
+        const existingRoom = rooms.find((room_in) => room_in.roomName === room)
+        existingRoom.participantsCount -= 1
+        const index = rooms.findIndex((room_in) => {
+            return room_in.roomName === room
+        })
+    
+        if(index !== -1) {
+            rooms.splice(index, 1)[0]
+        }
+
+        rooms.push(existingRoom)
+    }
 }
 
 const addUser = ({id, username, room}) => {
@@ -50,11 +85,16 @@ const addUser = ({id, username, room}) => {
     users.push(user)
     
     // Adding the list of all rooms
-    const roomAlreadyActive = rooms.find((room) => {
-        return room.roomName === room
+    // TODO : needs bit of refactoring
+    const roomAlreadyActive = rooms.find((room_in) => {
+        return room_in.roomName === room
     })
     if(!roomAlreadyActive) {
-        rooms.push({roomName: room})
+        updateParticipantsCountInRoom(room, 'create_and_add')
+    }
+    else {
+        
+        updateParticipantsCountInRoom(room, 'add')
     }
 
     return {
@@ -67,7 +107,8 @@ const removeUser = (id) => {
         return user.id === id
     })
 
-    if(index !== -1) {
+    if(index !== -1) { 
+        updateParticipantsCountInRoom(users[index].room, 'remove')
         return users.splice(index, 1)[0]
     }
 }
