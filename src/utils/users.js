@@ -9,10 +9,10 @@ const rooms = []
 const getListOfActiveRooms = () => {
 
     const activeRooms = rooms.filter((room) => {
-        console.log(room.roomName)
+        //console.log(room.roomName)
         var users = getUsersInRoom(room.roomName)
-        console.log(users)
-        if(!users) {
+        //console.log(users)
+        if(!users || users.length === 0) {
             return false;
         }
         return true

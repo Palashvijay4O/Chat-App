@@ -25,7 +25,7 @@
             <script id="room-list-template" type="text/html">
                 <div class="room-list">
                     <h2>Active Rooms</h2>
-                    <p>------------------------------------------------------</p>
+                    <hr>
                     <ul class="rooms">
                         {{#rooms}}
                         <li>
@@ -33,6 +33,7 @@
                         </li>
                         {{/rooms}}
                     </ul>
+                    <h3>{{noActiveRoomsMessage}}</h3>
                 </div>
             </script>
         </div>
