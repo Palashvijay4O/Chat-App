@@ -6,25 +6,35 @@
         <link rel="stylesheet" href="./css/styles.css"/>
     </head>
     <body>
-        <div class="chat">
-            <div id="sidebar" class="chat__sidebar">
+        <div id="main-container">
+            <div class="chat">
+                <div id="sidebar" class="chat__sidebar">
 
+                </div>    
+                <div class="chat__main">
+                    
+                    <div id="messages" class="chat__messages">
+
+                    </div>
+                    <div id="user-typing-box" class="typing__message">
+                            
+                    </div>
+                    
+                    <div class="compose">
+                        <form id="message-form">
+                            <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autocomplete="off">
+                            <button>Send</button>
+                        </form>
+                        <button id="send-location">Share Location</button>
+                    </div>
+                </div>                
+            
             </div>
-            <div class="chat__main">
-                <div id="messages" class="chat__messages"> </div>
-                <div id="user-typing-box" class="typing__message">
-                        
-                </div>
-                <div class="compose">
-                    <form id="message-form">
-                        <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autocomplete="off">
-                        <button>Send</button>
-                    </form>
-                    <button id="send-location">Share Location</button>
-                </div>
+
+            <div id="leave-button">
+                <button class="leave__button">Exit</button>
             </div>
         </div>
-        
 
         <script id="message-template" type="text/html">
             <div class="message">

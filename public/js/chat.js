@@ -21,6 +21,7 @@ const username = localStorage.getItem('username')
 const room = localStorage.getItem('room')
 
 var typingCounter;
+var obj;
 
 const autoScroll = () => {
     // New message element
@@ -74,6 +75,25 @@ socket.on('roomData', ({room, users}) => {
     $sidebar.innerHTML = html
 })
 
+socket.on('typingEventClient', ({text, isTyping}) => {
+    //console.log(message)
+    if(isTyping) {
+        const html = Mustache.render(userTypingTemplate, {message: text})
+        $userTypingBox.innerHTML = html
+    }
+    else {
+        const html = Mustache.render(userTypingTemplate, {message: text})
+        $userTypingBox.innerHTML = ''
+    }
+})
+
+socket.emit('join', {username, room}, (error) => {
+    if(error) {
+        alert(error)
+        location.href = '/'
+    }
+})
+
 $messageForm.addEventListener('submit', (event) => {
         event.preventDefault()
         const message = event.target.elements.messageTxt.value
@@ -98,8 +118,6 @@ $messageForm.addEventListener('submit', (event) => {
         })
 })
 
-
-var obj;
 
 $messageBox.addEventListener('keydown', (event) => { 
     if(obj) {
@@ -130,19 +148,7 @@ const timeout = (ms) => {
 }
 
 $messageBox.addEventListener('keyup', (event) => {
-    obj = timeout(4000)
-})
-
-socket.on('typingEventClient', ({text, isTyping}) => {
-    //console.log(message)
-    if(isTyping) {
-        const html = Mustache.render(userTypingTemplate, {message: text})
-        $userTypingBox.innerHTML = html
-    }
-    else {
-        const html = Mustache.render(userTypingTemplate, {message: text})
-        $userTypingBox.innerHTML = ''
-    }
+    obj = timeout(3000)
 })
 
 $sendLocationButton.addEventListener('click', (event) => {
@@ -158,9 +164,6 @@ $sendLocationButton.addEventListener('click', (event) => {
     })
 })
 
-socket.emit('join', {username, room}, (error) => {
-    if(error) {
-        alert(error)
-        location.href = '/'
-    }
+document.querySelector('body').addEventListener('load', (event) => {
+    confirm('Do you want to leave this page??')
 })
