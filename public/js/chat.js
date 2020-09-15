@@ -98,24 +98,39 @@ $messageForm.addEventListener('submit', (event) => {
         })
 })
 
-var hasAnyoneTyped = false
 
-$messageBox.addEventListener('input', (event) => { 
-    hasAnyoneTyped = true
+var obj;
+
+$messageBox.addEventListener('keydown', (event) => { 
+    if(obj) {
+        console.log('cancelling the obj')
+        obj.cancel()
+    }
+
     socket.emit('typingEvent', () => {
         
     })
 })
 
-$messageBox.addEventListener('keyup', (event) => {
-    hasAnyoneTyped = false
-    return new Promise(resolve => setTimeout(() => {
-        if(!hasAnyoneTyped) {
-        socket.emit('notTypingEvent', () => {
-        
-        })
+const timeout = (ms) => {
+    var timeOut, promise
+
+    promise = new Promise((resolve, reject) => {
+        timeOut = setTimeout(() => {
+            resolve(socket.emit('notTypingEvent', () => {
+
+            }))
+        }, ms)
+    })
+
+    return {
+        promise,
+        cancel: function() { clearTimeout(timeOut) }
     }
-    }, 2000))
+}
+
+$messageBox.addEventListener('keyup', (event) => {
+    obj = timeout(4000)
 })
 
 socket.on('typingEventClient', ({text, isTyping}) => {
