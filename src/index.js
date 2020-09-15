@@ -66,6 +66,21 @@ io.on('connection', (socket) => {
 
     })
     
+    socket.on('typingEvent', () => {
+        const user = getUser(socket.id)
+        socket.broadcast.to(user.room).emit('typingEventClient', {
+            text: `${user.username} is typing.....`,
+            isTyping: true
+        })
+    })
+
+    socket.on('notTypingEvent', () => {
+        const user = getUser(socket.id)
+        socket.broadcast.to(user.room).emit('typingEventClient', {
+            isTyping: false
+        })
+    })
+
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter()
         if(filter.isProfane(message)) {

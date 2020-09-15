@@ -138,8 +138,8 @@ button:disabled {
 .compose {
     display: flex;
     flex-shrink: 0;
-    margin-top: 16px;
     padding: 24px;
+    padding-top: 0px;
 }
 
 .compose form {
@@ -209,4 +209,12 @@ button:disabled {
     font-weight: bold;
     font-family: sans-serif;
     box-shadow: 0px 0px 17px 1px lightslategrey;
+}
+
+.typing__message {
+    padding: 0px;
+    padding-left: 24px;
+    font-size: 14px;
+    font-style: italic;
+    color: lightslategrey;
 }

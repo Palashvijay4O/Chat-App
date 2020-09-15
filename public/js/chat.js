@@ -7,15 +7,20 @@ const $messageFormButtom = $messageForm.querySelector('button')
 const $sendLocationButton = document.querySelector('#send-location')
 const $messages = document.querySelector('#messages')
 const $sidebar = document.querySelector('#sidebar')
+const $messageBox = document.querySelector('#message-box')
+const $userTypingBox = document.querySelector('#user-typing-box')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
+const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
 
 
 const username = localStorage.getItem('username')
 const room = localStorage.getItem('room')
+
+var typingCounter;
 
 const autoScroll = () => {
     // New message element
@@ -93,6 +98,37 @@ $messageForm.addEventListener('submit', (event) => {
         })
 })
 
+var hasAnyoneTyped = false
+
+$messageBox.addEventListener('input', (event) => { 
+    hasAnyoneTyped = true
+    socket.emit('typingEvent', () => {
+        
+    })
+})
+
+$messageBox.addEventListener('keyup', (event) => {
+    hasAnyoneTyped = false
+    return new Promise(resolve => setTimeout(() => {
+        if(!hasAnyoneTyped) {
+        socket.emit('notTypingEvent', () => {
+        
+        })
+    }
+    }, 2000))
+})
+
+socket.on('typingEventClient', ({text, isTyping}) => {
+    //console.log(message)
+    if(isTyping) {
+        const html = Mustache.render(userTypingTemplate, {message: text})
+        $userTypingBox.innerHTML = html
+    }
+    else {
+        const html = Mustache.render(userTypingTemplate, {message: text})
+        $userTypingBox.innerHTML = ''
+    }
+})
 
 $sendLocationButton.addEventListener('click', (event) => {
     if(!navigator.geolocation) {

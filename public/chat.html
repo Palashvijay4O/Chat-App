@@ -12,10 +12,12 @@
             </div>
             <div class="chat__main">
                 <div id="messages" class="chat__messages"> </div>
-                
+                <div id="user-typing-box" class="typing__message">
+                        
+                </div>
                 <div class="compose">
                     <form id="message-form">
-                        <input type="text" name="messageTxt" placeholder="Type something...." required autocomplete="off">
+                        <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autocomplete="off">
                         <button>Send</button>
                     </form>
                     <button id="send-location">Share Location</button>
@@ -56,6 +58,14 @@
                     </li>
                 {{/users}}
             </ul>
+        </script>
+
+        <script id="user-typing-template" type="text/html">
+            <div>
+                <p>
+                    {{message}}
+                </p>
+            </div>
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
