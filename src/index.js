@@ -112,6 +112,8 @@ io.on('connection', (socket) => {
             io.emit('roomList', {
                 rooms : getListOfActiveRooms()
             })
+
+            io.emit('typingEventClient', {isTyping: false})
         }
     })
 })

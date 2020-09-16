@@ -121,24 +121,20 @@ $messageForm.addEventListener('submit', (event) => {
 
 
 $messageBox.addEventListener('keydown', (event) => { 
+    // Need promise based implementation here as well
     if(obj) {
-        console.log('cancelling the obj')
         obj.cancel()
     }
 
-    socket.emit('typingEvent', () => {
-        
-    })
+    timeout('typingEvent', 500)
 })
 
-const timeout = (ms) => {
+const timeout = (emitEvent, ms) => {
     var timeOut, promise
 
     promise = new Promise((resolve, reject) => {
         timeOut = setTimeout(() => {
-            resolve(socket.emit('notTypingEvent', () => {
-
-            }))
+            resolve(socket.emit(emitEvent))
         }, ms)
     })
 
@@ -149,7 +145,7 @@ const timeout = (ms) => {
 }
 
 $messageBox.addEventListener('keyup', (event) => {
-    obj = timeout(3000)
+    obj = timeout('notTypingEvent', 3000)
 })
 
 $sendLocationButton.addEventListener('click', (event) => {
@@ -172,3 +168,24 @@ $leaveButton.addEventListener('click', (event) => {
         location.href = '/'
     }
 })
+
+// window.onload = () => {
+//     console.log('on load')
+
+//     window.addEventListener('beforeunload', (event) => {
+//         var confirmationMessage = 'It looks like you have been editing something. '
+//                                     + 'If you leave before saving, your changes will be lost.';
+    
+//         (event || window.event).returnValue = confirmationMessage; //Gecko + IE
+//         return confirmationMessage;
+//     })
+// }
+
+window.addEventListener('beforeunload', (event) => {
+            var confirmationMessage = 'Unsaved changes will be lost!!';
+        
+            (event || window.event).returnValue = confirmationMessage; //Gecko + IE
+            //document.hasFocus() === false ? confirm('Do you want to leave this page??') : ''
+            return confirmationMessage;
+})
+
