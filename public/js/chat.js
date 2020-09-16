@@ -164,28 +164,22 @@ $sendLocationButton.addEventListener('click', (event) => {
 $leaveButton.addEventListener('click', (event) => {
     var userInput = confirm('Do you want to leave this page??');
     if(userInput) {
+        $leaveButton.setAttribute('clicked', true)
         socket.emit('disconnet')
         location.href = '/'
+        return;
     }
 })
 
-// window.onload = () => {
-//     console.log('on load')
-
-//     window.addEventListener('beforeunload', (event) => {
-//         var confirmationMessage = 'It looks like you have been editing something. '
-//                                     + 'If you leave before saving, your changes will be lost.';
-    
-//         (event || window.event).returnValue = confirmationMessage; //Gecko + IE
-//         return confirmationMessage;
-//     })
-// }
-
 window.addEventListener('beforeunload', (event) => {
-            var confirmationMessage = 'Unsaved changes will be lost!!';
-        
-            (event || window.event).returnValue = confirmationMessage; //Gecko + IE
-            //document.hasFocus() === false ? confirm('Do you want to leave this page??') : ''
-            return confirmationMessage;
+    if($leaveButton.getAttribute('clicked')) {
+        $leaveButton.removeAttribute('clicked')
+        return;
+    }
+    var confirmationMessage = 'Unsaved changes will be lost!!';
+
+    (event || window.event).returnValue = confirmationMessage;
+    
+    return confirmationMessage;
 })
 
