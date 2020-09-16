@@ -9,6 +9,7 @@ const $messages = document.querySelector('#messages')
 const $sidebar = document.querySelector('#sidebar')
 const $messageBox = document.querySelector('#message-box')
 const $userTypingBox = document.querySelector('#user-typing-box')
+const $leaveButton = document.querySelector('#leave-button')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
@@ -164,6 +165,10 @@ $sendLocationButton.addEventListener('click', (event) => {
     })
 })
 
-document.querySelector('body').addEventListener('load', (event) => {
-    confirm('Do you want to leave this page??')
+$leaveButton.addEventListener('click', (event) => {
+    var userInput = confirm('Do you want to leave this page??');
+    if(userInput) {
+        socket.emit('disconnet')
+        location.href = '/'
+    }
 })
