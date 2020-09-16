@@ -41,11 +41,11 @@ input {
 
 button {
     cursor: pointer;
-    padding: 12px;
+    padding: 8px;
     background: #7C5CBF;
     border: none;
     color: white;
-    font-size: 16px;
+    width: 20%;
     transition: background .3s ease;
 }
 
@@ -95,7 +95,7 @@ button:disabled {
     height: 96vh;
     color: white;
     background: #333744;
-    width: 225px;
+    width: 35vw;
     overflow-y: scroll
 }
 
@@ -154,13 +154,17 @@ button:disabled {
     border: 1px solid #eeeeee;
     width: 100%;
     padding: 12px;
-    margin: 0 16px 0 0;
+    margin: 0 0px 0 0;
     flex-grow: 1;
 }
 
 .compose button {
-    width: 20%;
-    font-size: 14px;
+    width: 10vw;
+    max-width: 10vw;
+    font-size: 12px;
+    padding: 4px;
+    padding-left: auto;
+    padding-right: auto;
 }
 
 /* Chat Sidebar Styles */
@@ -204,7 +208,8 @@ button:disabled {
 .room-list {
     padding: 10px;
     background: white;
-    width: 15em;
+    width: 20vw;
+    float: right;
     height: 100vh;
 }
 
@@ -246,4 +251,10 @@ button:disabled {
 }
 #leave-button {
     margin-top: -4px;
+}
+
+button.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

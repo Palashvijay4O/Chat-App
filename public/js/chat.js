@@ -17,11 +17,11 @@ const locationMessageTemplate = document.querySelector('#location-message-templa
 const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
 const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
 
-
+// Global Constants
 const username = localStorage.getItem('username')
 const room = localStorage.getItem('room')
 
-var typingCounter;
+// Global Variables
 var obj;
 
 const autoScroll = () => {
@@ -105,17 +105,20 @@ $messageForm.addEventListener('submit', (event) => {
         $messageFormButtom.setAttribute('disabled', 'disabled')
         
         socket.emit('sendMessage', message, (error) => {
-            //setTimeout(() => {}, 2000)
+
             $messageFormButtom.removeAttribute('disabled')
             $messageFormInput.value = ''
-            $messageFormInput.focus()
-
+            
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+                document.activeElement.blur()
+            else
+                $messageFormInput.focus()
+            
             if(error) {
                 return console.log(error)
             }
 
             console.log('The message was delivered!')
-            
         })
 })
 
@@ -170,7 +173,12 @@ $leaveButton.addEventListener('click', (event) => {
         return;
     }
 })
+window.onload = function(event) {
+    // Can do conditional styling here
 
+    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+        document.querySelector('#sidebar').style.width = '20vw';
+}
 window.addEventListener('beforeunload', (event) => {
     if($leaveButton.getAttribute('clicked')) {
         $leaveButton.removeAttribute('clicked')
