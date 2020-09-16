@@ -68,17 +68,21 @@ io.on('connection', (socket) => {
     
     socket.on('typingEvent', () => {
         const user = getUser(socket.id)
-        socket.broadcast.to(user.room).emit('typingEventClient', {
-            text: `${user.username} is typing.....`,
-            isTyping: true
-        })
+        if(user) {
+            socket.broadcast.to(user.room).emit('typingEventClient', {
+                text: `${user.username} is typing.....`,
+                isTyping: true
+            })
+        }
     })
 
     socket.on('notTypingEvent', () => {
         const user = getUser(socket.id)
-        socket.broadcast.to(user.room).emit('typingEventClient', {
-            isTyping: false
-        })
+        if(user) {
+            socket.broadcast.to(user.room).emit('typingEventClient', {
+                isTyping: false
+            })
+        }
     })
 
     socket.on('sendMessage', (message, callback) => {
@@ -88,7 +92,9 @@ io.on('connection', (socket) => {
         }
 
         const user = getUser(socket.id)
-        io.to(user.room).emit('message', generateMessage(user.username, message))
+        if(user) {
+            io.to(user.room).emit('message', generateMessage(user.username, message))
+        }
         callback()
     })
 
@@ -96,7 +102,9 @@ io.on('connection', (socket) => {
         const text = `https://google.com/maps?q=${latitude},${longitude}`
         
         const user = getUser(socket.id)
-        io.to(user.room).emit('locationMessage', generateLocationMessage(user.username, text))
+        if(user) {
+            io.to(user.room).emit('locationMessage', generateLocationMessage(user.username, text))
+        }
         callback('Location shared!')
     })
 
