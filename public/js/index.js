@@ -2,9 +2,19 @@ const socket = io()
 
 const $roomList = document.querySelector('#room-list')
 const roomListTemplate = document.querySelector('#room-list-template').innerHTML
+import React from "react";
+import ReactDOM from 'react-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import App from  '../components/App';
+
+
+ReactDOM.render(
+    <App />, 
+    document.getElementById('root')
+)
 
 socket.emit('getActiveRooms', () => {
-    
+
 })
 
 socket.on('roomList', ({rooms}) => {

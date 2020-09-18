@@ -3,6 +3,7 @@ const http = require('http')
 const path = require('path')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
+
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = require('./utils/users')
 
@@ -17,7 +18,7 @@ const io = socketio(server)
 app.use(express.json())
 app.use(express.static(htmlDir))
 
-// app.get('/', async (req, res) => {
+// app.get('/', (req, res) => {
 //     res.render('index')
 // })
 
@@ -25,14 +26,11 @@ app.post('/chat.html', async (req, res) => {
     res.redirect('/chat.html')
 })
 
-
-let count = 0
-
 io.on('connection', (socket) => {
     console.log('New connection')
 
     socket.on('getActiveRooms', (callback) => {
-        rooms =  [{roomName: 'Room #1'}, {roomName: 'Room #2'}]
+        //rooms =  [{roomName: 'Room #1'}, {roomName: 'Room #2'}]
         
         io.emit('roomList', {
             rooms : getListOfActiveRooms()
@@ -125,7 +123,6 @@ io.on('connection', (socket) => {
         }
     })
 })
-
 
 server.listen(port, () => {
     console.log('Listening on the port ' + port)

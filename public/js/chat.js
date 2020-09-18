@@ -24,6 +24,44 @@ const room = localStorage.getItem('room')
 // Global Variables
 var obj;
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Header from '../components/Header'
+
+const titleSite = 'LightChat.com'
+
+class ChatPage extends React.Component {
+    constructor(props) {
+        super(props)
+        
+    }
+
+    handleClick(event) {
+        
+        event.preventDefault()
+        var userInput = confirm('Do you want to leave this page??');
+        if(userInput) {
+        $leaveButton.setAttribute('clicked', true)
+        socket.emit('disconnet')
+        location.href = '/'
+        return;
+    }
+    }
+    render() {
+        return (
+            <div className="banner">
+                <Header value={titleSite}/>
+                <button onClick={this.handleClick}>Exit</button>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <ChatPage />, 
+    document.getElementById('root')
+)
+
 const autoScroll = () => {
     // New message element
 
