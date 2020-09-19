@@ -7,9 +7,13 @@ const titleSite = 'LightChat.com'
 class App extends React.Component {
     render() {
         return (
-            <div>
-                <Header value={titleSite}/>
-                <Container />
+            <div style={{display: "flex", flexDirection: "column", flex: 1}}>
+                <div>
+                    <Header value={titleSite}/>
+                </div>
+                <div>
+                    <Container />
+                </div>
             </div>
         )
     }

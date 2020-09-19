@@ -61,9 +61,8 @@ button:disabled {
 /* Join Page Styles */
 
 .centered-form {
-    background: #333744;
-    width: 100vw;
-    height: 100vh;   
+    background: #333744; 
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -214,7 +213,7 @@ button:disabled {
     background: white;
     width: 30vw;
     float: right;
-    height: 100vh;
+    height: 100%;
 }
 
 .main-container {
