@@ -9,7 +9,6 @@ const $messages = document.querySelector('#messages')
 const $sidebar = document.querySelector('#sidebar')
 const $messageBox = document.querySelector('#message-box')
 const $userTypingBox = document.querySelector('#user-typing-box')
-const $leaveButton = document.querySelector('#leave-button')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
@@ -164,24 +163,17 @@ $sendLocationButton.addEventListener('click', (event) => {
     })
 })
 
-$leaveButton.addEventListener('click', (event) => {
-    var userInput = confirm('Do you want to leave this page??');
-    if(userInput) {
-        $leaveButton.setAttribute('clicked', true)
-        socket.emit('disconnet')
-        location.href = '/'
-        return;
-    }
-})
+
 window.onload = function(event) {
     // Can do conditional styling here
 
     if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
         document.querySelector('#sidebar').style.width = '20vw';
 }
+
 window.addEventListener('beforeunload', (event) => {
-    if($leaveButton.getAttribute('clicked') || event.target.getAttribute('clicked')) {
-        $leaveButton.removeAttribute('clicked')
+    if(event.target.getAttribute('clicked')) {
+        event.target.removeAttribute('clicked')
         return;
     }
     var confirmationMessage = 'Unsaved changes will be lost!!';

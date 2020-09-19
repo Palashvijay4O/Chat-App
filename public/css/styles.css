@@ -248,14 +248,10 @@ button:disabled {
     color: white;
     font-size: 12px;
     transition: background .3s ease;
-    width: 20%;
+    width: auto;
     margin: auto;
-    left: 40%;
-    position: absolute;
+    text-align: center;
     border-radius: 5px;
-}
-#leave-button {
-    margin-top: -4px;
 }
 
 button.truncate {
@@ -269,10 +265,12 @@ button.truncate {
     padding: 10px;
 }
 
+.flex_class {
+    display: flex;
+}
+
 .banner {
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    align-content: center;
-    margin: auto;
-    width: 20vw;
 }
