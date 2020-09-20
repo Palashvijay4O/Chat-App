@@ -182,3 +182,12 @@ window.addEventListener('beforeunload', (event) => {
     
     return confirmationMessage;
 })
+
+$('#confirmDeletePopup .modal-footer button').on('click', (event) => {
+    var $button = $(event.target)
+    if($button.attr('id') === 'confirm-yes') {
+        socket.emit('disconnet')
+        location.href = '/'
+        return;
+    }
+})

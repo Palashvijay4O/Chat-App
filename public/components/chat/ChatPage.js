@@ -11,6 +11,7 @@ class ChatPage extends React.Component {
     handleClick(event) {
         
         event.preventDefault()
+        event.stopPropagation()
         var userInput = confirm('Do you want to leave this page??');
         if(userInput) {
             event.target.setAttribute('clicked', true)
@@ -34,8 +35,8 @@ class ChatPage extends React.Component {
                             </td>
                             <td>
                                 <div className="btn-group">
-                                    <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Invite</button>
-                                    <button type="button" className="btn btn-danger btn-md" onClick={this.handleClick}>Exit</button>
+                                    <button type="button" className="btn btn-primary btn-md" data-toggle="modal" data-target="#invitationPopup">Invite</button>
+                                    <button type="button" className="btn btn-danger btn-md"  data-toggle="modal" data-target="#confirmDeletePopup">Exit</button>
                                 </div>
                             </td>
                         </tr>

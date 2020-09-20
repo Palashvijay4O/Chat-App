@@ -45,7 +45,48 @@
             
             </div>
         </div>
+        <!-- popup for delete -->
+        <div class="modal" id="confirmDeletePopup">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                <div class="modal-header">
+                    <h4 class="modal-title">Warning</h4>
+                </div>
+            
+                <div class="modal-body">
+                    Do you want to leave the room?
+                </div>
 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirm-no">No</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirm-yes">Yes</button>
+                </div>
+            
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="invitationPopup">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                <div class="modal-header">
+                    <h4 class="modal-title">Invite</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            
+                <div class="modal-body">
+                    <div style="display: flex;">
+                        <!-- <p>Do you want to leave the room?</p> -->
+                        <button type="button" class="btn btn-outline-light text-dark" style="width: 100%; text-align: left;" disabled data-dismiss="modal" id="copyInvite">http://www.google.com/</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="copyInvite">Copy</button>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
         <script id="message-template" type="text/html">
             <div class="message">
                 <p>
