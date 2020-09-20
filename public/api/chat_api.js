@@ -172,7 +172,7 @@ window.onload = function(event) {
 }
 
 window.addEventListener('beforeunload', (event) => {
-    if(event.target.getAttribute('clicked')) {
+    if(event.target && event.target.getAttribute('clicked')) {
         event.target.removeAttribute('clicked')
         return;
     }

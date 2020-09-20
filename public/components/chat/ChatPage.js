@@ -13,21 +13,34 @@ class ChatPage extends React.Component {
         event.preventDefault()
         var userInput = confirm('Do you want to leave this page??');
         if(userInput) {
-        event.target.setAttribute('clicked', true)
-        socket.emit('disconnet')
-        location.href = '/'
-        return;
+            event.target.setAttribute('clicked', true)
+            socket.emit('disconnet')
+            location.href = '/'
+            return;
+        }
+        else {
+            event.stopPropagation()
+        }
     }
-    }
+
     render() {
         return (
             <div className="banner">
-                <div>
-                    <Header value={this.props.value}/>
-                </div>
-                <div>
-                    <button className="leave__button" onClick={this.handleClick}>Exit</button>
-                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <Header value={this.props.value}/>
+                            </td>
+                            <td>
+                                <div className="btn-group">
+                                    <button type="button" className="btn btn-primary btn-md" onClick={this.handleClick}>Invite</button>
+                                    <button type="button" className="btn btn-danger btn-md" onClick={this.handleClick}>Exit</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
             </div>
         )
     }

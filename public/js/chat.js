@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ChatPage from '../components/chat/ChatPage'
 
-const titleSite = 'LightChat.com'
+const titleSite = 'EasyPing'
 
 
 ReactDOM.render(

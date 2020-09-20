@@ -7,7 +7,7 @@ class Container extends React.Component {
             <div className="main-container">
                 <div className="centered-form">
                     <div className="centered-form__box">
-                        <h1>Join</h1>
+                        <h3>Join</h3>
                         <form id="loginForm" action="/chat.html" method="post">
                             <label>Display Name</label>
                             <input type="text" name="username" placeholder="Display Name" required autoComplete="off"/>
@@ -17,7 +17,7 @@ class Container extends React.Component {
                         </form>
                     </div>
                 </div>
-                <div id="room-list">
+                <div id="room-list" className='text-center'>
 
                 </div>
             </div>

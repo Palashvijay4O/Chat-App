@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header'
-import Container from '../components/index/Container'
+import Header from '../Header'
+import Container from './Container'
 
-const titleSite = 'LightChat.com'
+const titleSite = 'EasyPing'
 
-class App extends React.Component {
+class MobileApp extends React.Component {
     render() {
         return (
             <div style={{display: "flex", flexDirection: "column", flex: 1}}>
@@ -19,4 +19,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+export default MobileApp;

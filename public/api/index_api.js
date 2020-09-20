@@ -1,10 +1,12 @@
+const { default: Header } = require("../components/Header")
+
 const socket = io()
 
 const $roomList = document.querySelector('#room-list')
+
 const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
 socket.emit('getActiveRooms', () => {
-
 })
 
 socket.on('roomList', ({rooms}) => {

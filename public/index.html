@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App</title>
         <link rel="icon" href="/img/favicon.png"/>
-        <link rel="stylesheet" href="./css/styles.css"/>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -17,15 +16,16 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="./css/styles.css"/>
     </head>
     <body>
-        <div id="root">
+        <div id="root" class="container-fluid">
 
         </div>
         
         <script id="room-list-template" type="text/html">
             <div class="room-list">
-                <h2>Active Rooms</h2>
+                <h4>Active Rooms</h4>
                 <hr>
                 <ul class="rooms">
                     {{#rooms}}
@@ -34,7 +34,7 @@
                     </li>
                     {{/rooms}}
                 </ul>
-                <h3>{{noActiveRoomsMessage}}</h3>
+                <h5>{{noActiveRoomsMessage}}</h5>
             </div>
         </script>
         

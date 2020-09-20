@@ -72,7 +72,7 @@ button:disabled {
     box-shadow: 0px 0px 17px 1px #1D1F26;
     background: #F7F7FA;
     padding: 24px;
-    width: 50vw;
+    width: auto;
     max-width: 480px;
     height: auto;
 }
@@ -93,7 +93,7 @@ button:disabled {
 }
 
 .chat__sidebar {
-    height: 96vh;
+    height: 90vh;
     color: white;
     background: #333744;
     width: 35vw;
@@ -106,7 +106,8 @@ button:disabled {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    max-height: 95vh;
+    max-height: 90vh;
+    width: 100%;
 }
 
 .chat__messages {
@@ -130,6 +131,7 @@ button:disabled {
 .message__meta {
     color: #777;
     font-size: 14px;
+    float: right;
 }
 
 .message a {
@@ -218,6 +220,9 @@ button:disabled {
 
 .main-container {
     display: flex;
+    height: 90vh;
+    width: 100%;
+    border-top: 1px solid;
 }
 
 .room-details {
@@ -269,7 +274,31 @@ button.truncate {
 }
 
 .banner {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    background-color: #e9ecef;
+}
+
+.btn {
+    width: auto;
+}
+
+.btn-group {
+    margin-right:10px;
+    float: right;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+table {
+    width: 100%;
+}
+
+td > button {
+    float: right;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;;
 }
