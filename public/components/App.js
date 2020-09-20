@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header'
 import Container from '../components/index/Container'
 
-const titleSite = 'LightChat.com'
+const titleSite = 'EasyPing'
 
 class App extends React.Component {
     render() {

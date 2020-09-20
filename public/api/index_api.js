@@ -6,6 +6,12 @@ const $roomList = document.querySelector('#room-list')
 
 const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
+// Fix for bug #2
+let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');
+
+document.getElementsByClassName('main-container')[0].style.setProperty('height', ((window.innerHeight * 0.01 -bannerHeight) * 100))
+
+
 socket.emit('getActiveRooms', () => {
 })
 
