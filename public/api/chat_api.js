@@ -1,5 +1,7 @@
 const socket = io()
 const bcrypt = require('bcryptjs')
+// const jwt = require('jsonwebtoken')
+
 // Elements
 const $messageForm = document.querySelector('#message-form')
 const $messageFormInput = $messageForm.querySelector('input')
@@ -192,10 +194,44 @@ $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
     }
 })
 
+const fetchLink = async function () {
+    const link = location.origin + '/invite/';
+    
+    const response = await fetch(link, {method: 'POST', headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                username: 'jyoti',
+                room: 'oracle'
+            })
+        })
+    
+    return response.json()
+}
+
+
+
 $('#invitationPopup').on('show.bs.modal', (event) => {
     // Encryption here
+    
     const link = location.origin + '/join/';
-    const queryString = bcrypt.hashSync(localStorage.getItem('username') + '::' + localStorage.getItem('room'), 8);
-    $('#inviteLink').prop('value', link + '?q=' + queryString)
+    fetchLink().then((data) => {
+        console.log(data.responseSigned.username)
+        console.log(data.responseSigned.room)
+        const queryString = data.responseSigned.username + '::' + data.responseSigned.room;
+        $('#inviteLink').prop('value', link + '?q=' + queryString)
+    });
 
+})
+
+$('#copyInvite').on('click', (event) => {
+    var link = document.getElementById('inviteLink')
+    link.select()
+    link.setSelectionRange(0, 99999);
+
+    try {
+        document.execCommand('copy');
+    } catch {
+        return;
+    }
 })
