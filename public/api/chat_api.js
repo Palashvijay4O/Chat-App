@@ -1,5 +1,5 @@
 const socket = io()
-
+const bcrypt = require('bcryptjs')
 // Elements
 const $messageForm = document.querySelector('#message-form')
 const $messageFormInput = $messageForm.querySelector('input')
@@ -194,6 +194,8 @@ $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
 
 $('#invitationPopup').on('show.bs.modal', (event) => {
     // Encryption here
-    $('#inviteLink').html(location.href + '?q=' + localStorage.getItem('username') + '::' + localStorage.getItem('room'))
+    const link = location.origin + '/join/';
+    const queryString = bcrypt.hashSync(localStorage.getItem('username') + '::' + localStorage.getItem('room'), 8);
+    $('#inviteLink').prop('value', link + '?q=' + queryString)
 
 })
