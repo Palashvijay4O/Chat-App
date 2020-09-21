@@ -191,3 +191,9 @@ $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
         return;
     }
 })
+
+$('#invitationPopup').on('show.bs.modal', (event) => {
+    // Encryption here
+    $('#inviteLink').html(location.href + '?q=' + localStorage.getItem('username') + '::' + localStorage.getItem('room'))
+
+})

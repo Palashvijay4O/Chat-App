@@ -298,6 +298,10 @@ td > button {
     float: right;
 }
 
+td {
+    width: 100%;
+}
+
 .container-fluid {
     padding-left: 0;
     padding-right: 0;;
