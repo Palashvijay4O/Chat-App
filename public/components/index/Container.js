@@ -13,7 +13,7 @@ class Container extends React.Component {
                             <input type="text" name="username" placeholder="Display Name" required autoComplete="off"/>
                             <label>Room Name</label>
                             <input type="text" name="room" placeholder="Room" required autoComplete="off"/>
-                            <button>Join</button>
+                            <button type="submit">Join</button>
                         </form>
                     </div>
                 </div>

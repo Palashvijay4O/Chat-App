@@ -8,18 +8,21 @@ const Filter = require('bad-words')
 
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = require('./utils/users')
-const { response } = require('express')
 
 const htmlDir = path.join(__dirname, '../public')
+
+console.log("htmlDir", htmlDir)
 const port = process.env.PORT || 3000
 
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-//app.set('view engine', 'html');
+
 app.use(express.json())
 app.use(express.static(htmlDir))
+
+//app.set('view engine', 'html');
 
 // app.get('/', (req, res) => {
 //     res.render('index')
@@ -27,6 +30,11 @@ app.use(express.static(htmlDir))
 
 app.post('/chat.html', async (req, res) => {
     res.redirect('/chat.html')
+})
+
+app.post('/chat', async (req, res) => {
+    
+    res.render('chat')
 })
 
 app.post('/invite/', async (req, res) => {

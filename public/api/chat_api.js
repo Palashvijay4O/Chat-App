@@ -171,6 +171,8 @@ window.onload = function(event) {
 
     if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
         document.querySelector('#sidebar').style.width = '20vw';
+    else
+        document.querySelector('#sidebar').style.width = auto;
 }
 
 window.addEventListener('beforeunload', (event) => {

@@ -288,6 +288,7 @@ button.truncate {
 
 p {
     margin-bottom: 0;
+    word-break: break-all;
 }
 
 table {
@@ -311,4 +312,11 @@ td {
     padding: 0%;
     width: 100%;
     background: lightgrey;
+}
+
+.users li {
+    text-overflow: ellipsis;
+    width: auto;
+    overflow:hidden; 
+    white-space:nowrap;
 }

@@ -28,7 +28,27 @@ socket.on('roomList', ({rooms}) => {
     }
 })
 
+const fetchAsync = async function () {
+    const link = location.origin + '/chat/';
+    
+    const response = await fetch(link, {method: 'POST', headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                username: 'jyoti',
+                room: 'oracle'
+            })
+        })
+    
+    return response.json()
+}
+
+
 document.querySelector('#loginForm').addEventListener('submit', (event) => {
     localStorage.setItem('username', document.querySelector('#loginForm').querySelector('input[name="username"]').value)
     localStorage.setItem('room', document.querySelector('#loginForm').querySelector('input[name="room"]').value)
+
+    // Instead send a post request here
+    
+
 })
