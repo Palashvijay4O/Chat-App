@@ -18,6 +18,8 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(express.json())
 app.use(express.static(htmlDir))
@@ -29,7 +31,8 @@ app.use(express.static(htmlDir))
 // })
 
 app.post('/chat.html', async (req, res) => {
-    res.redirect('/chat.html')
+    console.log(req.body)
+    res.sendFile(path.join(__dirname, '../public/chat.html'))
 })
 
 app.post('/chat', async (req, res) => {

@@ -145,6 +145,7 @@ button:disabled {
     flex-shrink: 0;
     padding: 24px;
     padding-top: 0px;
+    padding-bottom: 5px;
 }
 
 .compose form {
