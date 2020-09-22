@@ -108,6 +108,10 @@ button:disabled {
     flex-direction: column;
     max-height: 90vh;
     width: 100%;
+    border: 1px solid;
+    margin: 0px 5px 0px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 15px lightgray;
 }
 
 .chat__messages {
@@ -145,7 +149,8 @@ button:disabled {
     flex-shrink: 0;
     padding: 24px;
     padding-top: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    padding-left: 12px;
 }
 
 .compose form {

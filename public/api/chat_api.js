@@ -118,6 +118,9 @@ $messageForm.addEventListener('submit', (event) => {
             if(error) {
                 return console.log(error)
             }
+            
+            // if typing is happening
+            timeout('notTypingEvent', 0)
 
             console.log('The message was delivered!')
         })
@@ -172,19 +175,19 @@ window.onload = function(event) {
     if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
         document.querySelector('#sidebar').style.width = '20vw';
     else
-        document.querySelector('#sidebar').style.width = auto;
+        document.querySelector('#sidebar').style.width = 'auto';
 }
 
 window.addEventListener('beforeunload', (event) => {
-    if(event.target && event.target.getAttribute('clicked')) {
-        event.target.removeAttribute('clicked')
-        return;
-    }
-    var confirmationMessage = 'Unsaved changes will be lost!!';
+    // // if(event.target && event.target.getAttribute('clicked')) {
+    // //     event.target.removeAttribute('clicked')
+    // //     return;
+    // // }
+    // var confirmationMessage = 'Unsaved changes will be lost!!';
 
-    (event || window.event).returnValue = confirmationMessage;
+    // (event || window.event).returnValue = confirmationMessage;
     
-    return confirmationMessage;
+    // return confirmationMessage;
 })
 
 $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
@@ -218,8 +221,6 @@ $('#invitationPopup').on('show.bs.modal', (event) => {
     
     const link = location.origin + '/join/';
     fetchLink().then((data) => {
-        console.log(data.responseSigned.username)
-        console.log(data.responseSigned.room)
         const queryString = data.responseSigned.username + '::' + data.responseSigned.room;
         $('#inviteLink').prop('value', link + '?q=' + queryString)
     });
