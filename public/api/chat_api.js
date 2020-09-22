@@ -177,6 +177,8 @@ window.onload = function(event) {
         document.querySelector('#sidebar').style.width = '20vw';
     else
         document.querySelector('#sidebar').style.width = 'auto';
+
+    document.querySelector('.main-container').style.setProperty('display', 'flex');
 }
 
 window.addEventListener('beforeunload', (event) => {

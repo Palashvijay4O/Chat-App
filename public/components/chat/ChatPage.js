@@ -35,8 +35,8 @@ class ChatPage extends React.Component {
                             </td>
                             <td>
                                 <div className="btn-group">
-                                    <button type="button" className="btn btn-primary btn-md" data-toggle="modal" data-target="#invitationPopup">Invite</button>
-                                    <button type="button" className="btn btn-danger btn-md"  data-toggle="modal" data-target="#confirmDeletePopup">Exit</button>
+                                    <button type="button" className="btn btn-primary btn-md" data-toggle="modal" data-target="#invitationPopup" id="inviteButton">Invite</button>
+                                    <button type="button" className="btn btn-danger btn-md"  data-toggle="modal" data-target="#confirmDeletePopup" id="leaveButton">Exit</button>
                                 </div>
                             </td>
                         </tr>

@@ -90,6 +90,7 @@ button:disabled {
 
 .chat {
     display: flex;
+    width: 100%;
 }
 
 .chat__sidebar {
@@ -225,10 +226,10 @@ button:disabled {
 }
 
 .main-container {
-    display: flex;
+    display: none;
     height: calc(90 * var(--vh));
     width: 100%;
-    border-top: 1px solid;
+    /* border-top: 1px solid; */
 }
 
 .room-details {

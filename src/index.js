@@ -31,13 +31,7 @@ app.use(express.static(htmlDir))
 // })
 
 app.post('/chat.html', async (req, res) => {
-    console.log(req.body)
     res.sendFile(path.join(__dirname, '../public/chat.html'))
-})
-
-app.post('/chat', async (req, res) => {
-    
-    res.render('chat')
 })
 
 app.post('/invite/', async (req, res) => {
