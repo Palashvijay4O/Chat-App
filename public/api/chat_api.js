@@ -182,15 +182,7 @@ window.onload = function(event) {
 }
 
 window.addEventListener('beforeunload', (event) => {
-    // // if(event.target && event.target.getAttribute('clicked')) {
-    // //     event.target.removeAttribute('clicked')
-    // //     return;
-    // // }
-    // var confirmationMessage = 'Unsaved changes will be lost!!';
-
-    // (event || window.event).returnValue = confirmationMessage;
     
-    // return confirmationMessage;
     socket.disconnect()
 })
 

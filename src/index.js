@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
-const bcrypt = require('bcryptjs')
+var compression = require('compression');
 const jwt = require('jsonwebtoken')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.json())
 app.use(express.static(htmlDir))
+app.use(compression())
 
 //app.set('view engine', 'html');
 
