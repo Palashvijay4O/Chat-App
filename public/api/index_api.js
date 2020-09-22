@@ -63,6 +63,8 @@ document.querySelector('#loginForm').addEventListener('submit', (event) => {
     localStorage.setItem('room', document.querySelector('#loginForm').querySelector('input[name="room"]').value)
 
     // Instead send a post request here
-    
-
 })
+
+window.onbeforeunload = (event) => {
+    socket.disconnect()
+}

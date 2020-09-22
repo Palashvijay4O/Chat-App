@@ -191,6 +191,7 @@ window.addEventListener('beforeunload', (event) => {
     // (event || window.event).returnValue = confirmationMessage;
     
     // return confirmationMessage;
+    socket.disconnect()
 })
 
 $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
