@@ -6,10 +6,23 @@ const $roomList = document.querySelector('#room-list')
 
 const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
-// Fix for bug #2
-let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');
+var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
+console.log(VIEWPORT_HEIGHT)
+$('#vh-element').remove();
 
-document.getElementsByClassName('main-container')[0].style.setProperty('height', ((window.innerHeight * 0.01 -bannerHeight) * 100))
+// Fix for bug #2 -- NOT WORKING 
+//let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');
+
+//document.getElementsByClassName('main-container')[0].style.setProperty('height', ((VIEWPORT_HEIGHT - bannerHeight)))
+
+// Fix for bug #2 -- WORKING
+window.onload = (event) => {
+    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+}
+
+window.addEventListener('resize', (event) => { 
+    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+})
 
 
 socket.emit('getActiveRooms', () => {

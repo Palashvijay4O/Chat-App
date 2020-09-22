@@ -93,7 +93,7 @@ button:disabled {
 }
 
 .chat__sidebar {
-    height: 90vh;
+    height: calc(90 * var(--vh));
     color: white;
     background: #333744;
     width: 35vw;
@@ -106,8 +106,12 @@ button:disabled {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
+    max-height: calc(90 * var(--vh));
     width: 100%;
+    border: 1px solid;
+    margin: 0px 5px 0px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 15px lightgray;
 }
 
 .chat__messages {
@@ -145,7 +149,8 @@ button:disabled {
     flex-shrink: 0;
     padding: 24px;
     padding-top: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    padding-left: 12px;
 }
 
 .compose form {
@@ -221,7 +226,7 @@ button:disabled {
 
 .main-container {
     display: flex;
-    height: 90vh;
+    height: calc(90 * var(--vh));
     width: 100%;
     border-top: 1px solid;
 }
