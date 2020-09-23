@@ -1,14 +1,12 @@
-const { default: Header } = require("../components/Header")
-
 const socket = io()
 
 const $roomList = document.querySelector('#room-list')
 
 const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
-var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
-console.log(VIEWPORT_HEIGHT)
-$('#vh-element').remove();
+// var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
+// console.log(VIEWPORT_HEIGHT)
+// $('#vh-element').remove();
 
 // Fix for bug #2 -- NOT WORKING 
 //let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');

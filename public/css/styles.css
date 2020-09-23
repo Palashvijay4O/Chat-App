@@ -94,13 +94,20 @@ button:disabled {
 }
 
 .chat__sidebar {
-    height: calc(90 * var(--vh));
+    height: calc(5 * var(--vh));
     color: white;
     background: #333744;
-    width: 35vw;
-    overflow-y: scroll
+    width:10vw;
+    overflow-y: scroll;
+    /* transition-property: width;
+    transition-duration: 2s; */
+    transition: width 1s ease-in-out, height 1s ease-in-out; 
 }
 
+.chat__sidebar:hover {
+    width: 40%;
+    height: calc(90 * var(--vh));;
+}
 /* Chat styles */
 
 .chat__main {

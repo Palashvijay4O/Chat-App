@@ -168,15 +168,18 @@ $sendLocationButton.addEventListener('click', (event) => {
     })
 })
 
+document.querySelector('.chat__sidebar').addEventListener('mouseenter', (event) => {
+    document.querySelector('.chat__sidebar').setProperty('width', '90%');
+})
 
 window.onload = function(event) {
     // Can do conditional styling here
     document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
     
-    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
-        document.querySelector('#sidebar').style.width = '20vw';
-    else
-        document.querySelector('#sidebar').style.width = 'auto';
+    // if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+    //     document.querySelector('.chat__sidebar').style.setProperty('width', "20vw");
+    // else
+    //     document.querySelector('.chat__sidebar').style.setProperty('width', "auto");
 
     document.querySelector('.main-container').style.setProperty('display', 'flex');
 }

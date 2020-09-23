@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header'
-import Container from '../components/index/Container'
+import Header from '../Header'
+import Container from './Container'
 
 const titleSite = 'EasyPing'
 

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-import App from  '../components/App';
+import App from  '../components/index/App';
 import MobileApp from  '../components/index/MobileApp';
 const socket = io()
 
