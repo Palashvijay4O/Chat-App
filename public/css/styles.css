@@ -41,7 +41,7 @@ input {
 
 button:hover {
     /* background: #6b47b8; */
-    opacity: 0.5;
+    opacity: 0.2;
 }
 
 button:disabled {
@@ -86,19 +86,20 @@ button:disabled {
 }
 
 .chat__sidebar {
-    height: calc(9 * var(--vh));
+    height: calc(90 * var(--vh));
     color: white;
     background: #333744;
     width:10vw;
     overflow-y: scroll;
     /* transition-property: width;
     transition-duration: 2s; */
-    transition: width 1s ease-in-out, height 1s ease-in-out; 
+    transition: width 1s ease-in-out;
+    /* , height 1s ease-in-out;  */
 }
 
 .chat__sidebar:hover {
-    width: 30%;
-    height: calc(90 * var(--vh));;
+    width: 95vw;
+    /* height: calc(90 * var(--vh)); */
 }
 /* Chat styles */
 
@@ -125,9 +126,15 @@ button:disabled {
 
 .message {
     margin-bottom: 16px;
-    background-color: rgb(217, 209, 230);
+}
+
+.message p:nth-child(2) {
+    background-color: rgb(162, 219, 250);
     border-radius: 8px;
-    padding: 5px;
+    display: inline;
+    padding: 4px;
+    clear: both;
+    border: 1px solid;
 }
 
 .message__name {
@@ -175,17 +182,15 @@ button:disabled {
 .send-button{
     width: 45px;
     height: 45px;
-    max-width: 10vw;
     padding: 4px;
     margin-left: auto;
     padding-left: auto;
     padding-right: auto;
-    border: 0.1px black;
-    border-radius: 30px;
-    background: url('../img/send.png') no-repeat center;
-    background-size: 40px 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: url('../img/send.png') no-repeat left center;
+    background-size: 35px 35px;
     box-shadow: 10px black;
-    
 }
 /* Chat Sidebar Styles */
 
