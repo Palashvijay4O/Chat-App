@@ -41,7 +41,7 @@ input {
 
 button:hover {
     /* background: #6b47b8; */
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 button:disabled {
