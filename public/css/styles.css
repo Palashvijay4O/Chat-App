@@ -9,7 +9,6 @@
 html {
     font-size: 16px;
     height: 100%;
-    background-image: url('/img/background-img.png');
 }
 
 input {
@@ -39,23 +38,16 @@ input {
     outline: none;
 }
 
-button {
-    cursor: pointer;
-    padding: 8px;
-    background: #7C5CBF;
-    border: none;
-    color: white;
-    width: 20%;
-    transition: background .3s ease;
-}
 
 button:hover {
-    background: #6b47b8;
+    /* background: #6b47b8; */
+    opacity: 0.5;
 }
 
 button:disabled {
     cursor: default;
-    background: #7c5cbf94;
+    /* background: #7c5cbf94; */
+    opacity: 0.5;
 }
 
 /* Join Page Styles */
@@ -94,7 +86,7 @@ button:disabled {
 }
 
 .chat__sidebar {
-    height: calc(5 * var(--vh));
+    height: calc(9 * var(--vh));
     color: white;
     background: #333744;
     width:10vw;
@@ -105,7 +97,7 @@ button:disabled {
 }
 
 .chat__sidebar:hover {
-    width: 40%;
+    width: 30%;
     height: calc(90 * var(--vh));;
 }
 /* Chat styles */
@@ -113,6 +105,7 @@ button:disabled {
 .chat__main {
     flex-grow: 1;
     display: flex;
+    /* background-image: url('../img/background-img.jpg'); */
     flex-direction: column;
     max-height: calc(90 * var(--vh));
     width: 100%;
@@ -124,14 +117,17 @@ button:disabled {
 
 .chat__messages {
     flex-grow: 1;
-    padding: 24px 24px 10px 24px;
+    padding: 24px 24px 10px 12px;
     overflow-y: scroll;
 }
 
 /* Message Styles */
 
 .message {
-    margin-bottom: 16px;   
+    margin-bottom: 16px;
+    background-color: rgb(217, 209, 230);
+    border-radius: 8px;
+    padding: 5px;
 }
 
 .message__name {
@@ -155,7 +151,7 @@ button:disabled {
 .compose {
     display: flex;
     flex-shrink: 0;
-    padding: 24px;
+    padding: 10px;
     padding-top: 0px;
     padding-bottom: 10px;
     padding-left: 12px;
@@ -164,7 +160,7 @@ button:disabled {
 .compose form {
     display: flex;
     flex-grow: 1;
-    margin-right: 16px;
+    margin-right: 0px;
 }
 
 .compose input {
@@ -176,23 +172,40 @@ button:disabled {
     border-radius: 2em;
 }
 
-.compose button {
-    width: 10vw;
+.send-button{
+    width: 45px;
+    height: 45px;
+    max-width: 10vw;
+    padding: 4px;
+    margin-left: auto;
+    padding-left: auto;
+    padding-right: auto;
+    border: 0.1px black;
+    border-radius: 30px;
+    background: url('../img/send.png') no-repeat center;
+    background-size: 40px 40px;
+    box-shadow: 10px black;
+    
+}
+/* Chat Sidebar Styles */
+
+#send-location {
+    width: 45px;
+    height: 45px;
     max-width: 10vw;
     font-size: 12px;
     padding: 4px;
     padding-left: auto;
     padding-right: auto;
-    border-radius: 5px;
+    border-radius: 50px;
+    background-image: url('../img/send.png') no-repeat left center;
 }
-
-/* Chat Sidebar Styles */
-
 .room-title {
     font-weight: 400;
     font-size: 22px;
     background: #2c2f3a;
-    padding: 24px;   
+    padding: 24px;
+    padding-left: 10px;
 }
 
 .list-title {
@@ -333,4 +346,14 @@ td {
     width: auto;
     overflow:hidden; 
     white-space:nowrap;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px;
+    background: #7C5CBF;
+    border: none;
+    color: white;
+    width: 20%;
+    transition: background .3s ease;
 }

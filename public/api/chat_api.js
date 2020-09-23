@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 const $messageForm = document.querySelector('#message-form')
 const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButtom = $messageForm.querySelector('button')
-const $sendLocationButton = document.querySelector('#send-location')
+//const $sendLocationButton = document.querySelector('#send-location')
 const $messages = document.querySelector('#messages')
 const $sidebar = document.querySelector('#sidebar')
 const $messageBox = document.querySelector('#message-box')
@@ -155,22 +155,22 @@ $messageBox.addEventListener('keyup', (event) => {
     obj = timeout('notTypingEvent', 3000)
 })
 
-$sendLocationButton.addEventListener('click', (event) => {
-    if(!navigator.geolocation) {
-        return alert('Geolocation is not supported for your browser')
-    }
-    $sendLocationButton.setAttribute('disabled', 'disabled')
-    navigator.geolocation.getCurrentPosition((position) => { 
-        const {latitude, longitude} = position.coords
-        socket.emit('sendLocation', {latitude, longitude}, (message) => {
-            $sendLocationButton.removeAttribute('disabled')
-        }) 
-    })
-})
+// $sendLocationButton.addEventListener('click', (event) => {
+//     if(!navigator.geolocation) {
+//         return alert('Geolocation is not supported for your browser')
+//     }
+//     $sendLocationButton.setAttribute('disabled', 'disabled')
+//     navigator.geolocation.getCurrentPosition((position) => { 
+//         const {latitude, longitude} = position.coords
+//         socket.emit('sendLocation', {latitude, longitude}, (message) => {
+//             $sendLocationButton.removeAttribute('disabled')
+//         }) 
+//     })
+// })
 
-document.querySelector('.chat__sidebar').addEventListener('mouseenter', (event) => {
-    document.querySelector('.chat__sidebar').setProperty('width', '90%');
-})
+// document.querySelector('.chat__sidebar').addEventListener('mouseenter', (event) => {
+//     document.querySelector('.chat__sidebar').setProperty('width', '90%');
+// })
 
 window.onload = function(event) {
     // Can do conditional styling here
@@ -239,5 +239,6 @@ $('#copyInvite').on('click', (event) => {
 })
 
 window.addEventListener('resize', () => { 
-    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+        document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
 })
