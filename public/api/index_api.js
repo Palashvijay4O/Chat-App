@@ -1,28 +1,28 @@
-const socket = io()
+// const socket = io()
 
-// @Depricated
-// const $roomList = document.querySelector('#room-list')
+// // @Depricated
+// // const $roomList = document.querySelector('#room-list')
 
-// const roomListTemplate = document.querySelector('#room-list-template').innerHTML
+// // const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
-// var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
-// console.log(VIEWPORT_HEIGHT)
-// $('#vh-element').remove();
+// // var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
+// // console.log(VIEWPORT_HEIGHT)
+// // $('#vh-element').remove();
 
-// Fix for bug #2 -- NOT WORKING 
-//let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');
+// // Fix for bug #2 -- NOT WORKING 
+// //let bannerHeight = window.getComputedStyle(document.getElementsByClassName('banner')[0], null).getPropertyValue('height');
 
-//document.getElementsByClassName('main-container')[0].style.setProperty('height', ((VIEWPORT_HEIGHT - bannerHeight)))
+// //document.getElementsByClassName('main-container')[0].style.setProperty('height', ((VIEWPORT_HEIGHT - bannerHeight)))
 
-// Fix for bug #2 -- WORKING
-window.onload = (event) => {
-    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
-    document.querySelector('.main-container').style.setProperty('display', 'flex');
-}
+// // Fix for bug #2 -- WORKING
+// window.onload = (event) => {
+//     document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+//     document.querySelector('.main-container').style.setProperty('display', 'flex');
+// }
 
-window.addEventListener('resize', (event) => { 
-    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
-})
+// window.addEventListener('resize', (event) => { 
+//     document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+// })
 
 
 // @Depricated
@@ -42,29 +42,29 @@ window.addEventListener('resize', (event) => {
 //     }
 // })
 
-const fetchAsync = async function () {
-    const link = location.origin + '/chat/';
+// const fetchAsync = async function () {
+//     const link = location.origin + '/chat/';
     
-    const response = await fetch(link, {method: 'POST', headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                username: 'jyoti',
-                room: 'oracle'
-            })
-        })
+//     const response = await fetch(link, {method: 'POST', headers: {
+//             'Content-Type': 'application/json;charset=utf-8'
+//             },
+//             body: JSON.stringify({
+//                 username: 'jyoti',
+//                 room: 'oracle'
+//             })
+//         })
     
-    return response.json()
-}
+//     return response.json()
+// }
 
 
-document.querySelector('#loginForm').addEventListener('submit', (event) => {
-    localStorage.setItem('username', document.querySelector('#loginForm').querySelector('input[name="username"]').value)
-    localStorage.setItem('room', document.querySelector('#loginForm').querySelector('input[name="room"]').value)
+// // document.querySelector('#loginForm').addEventListener('submit', (event) => {
+// //     localStorage.setItem('username', document.querySelector('#loginForm').querySelector('input[name="username"]').value)
+// //     localStorage.setItem('room', document.querySelector('#loginForm').querySelector('input[name="room"]').value)
 
-    // Instead send a post request here
-})
+// //     // Instead send a post request here
+// // })
 
-window.onbeforeunload = (event) => {
-    socket.disconnect()
-}
+// window.onbeforeunload = (event) => {
+//     socket.disconnect()
+// }

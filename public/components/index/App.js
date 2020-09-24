@@ -14,7 +14,7 @@ class App extends React.Component {
             room: '',
             roomsAndParticipants: []
         }
-        this.socket = io('http://localhost:3000');
+        this.socket = io();
 
         this.socket.emit('getActiveRooms', () => {
             //console.log('emit')
@@ -28,6 +28,19 @@ class App extends React.Component {
         })
     }
     
+    componentDidMount() {
+        document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+        document.querySelector('.main-container').style.setProperty('display', 'flex');
+
+        window.addEventListener('resize', (event) => { 
+        document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+        })
+    }
+
+    componentWillUnmount() {
+        this.socket.disconnect()
+    }
+
     render() {
         return (
             <div style={{display: "flex", flexDirection: "column", flex: 1}}>
