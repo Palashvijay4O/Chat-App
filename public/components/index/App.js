@@ -1,8 +1,6 @@
 import React from 'react';
 import Header from '../Header'
 import Container from './Container'
-//import io from 'socket.io-client'
-//const socket = io()
 const titleSite = 'EasyPing'
 
 class App extends React.Component {
@@ -27,7 +25,7 @@ class App extends React.Component {
             })
         })
     }
-    
+
     componentDidMount() {
         document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
         document.querySelector('.main-container').style.setProperty('display', 'flex');
