@@ -1,8 +1,9 @@
 const socket = io()
 
-const $roomList = document.querySelector('#room-list')
+// @Depricated
+// const $roomList = document.querySelector('#room-list')
 
-const roomListTemplate = document.querySelector('#room-list-template').innerHTML
+// const roomListTemplate = document.querySelector('#room-list-template').innerHTML
 
 // var VIEWPORT_HEIGHT = $('<div id="vh-element" style="height:100vh"></div>"').appendTo('body').height();
 // console.log(VIEWPORT_HEIGHT)
@@ -24,21 +25,22 @@ window.addEventListener('resize', (event) => {
 })
 
 
-socket.emit('getActiveRooms', () => {
-})
+// @Depricated
+// socket.emit('getActiveRooms', () => {
+// })
 
-socket.on('roomList', ({rooms}) => {
-    if(rooms.length > 0) {
-        const html = Mustache.render(roomListTemplate, {rooms, roomDetails: function() {
-            return this.roomName + " (" + this.participantsCount + ")"
-        }})
-        $roomList.innerHTML = html
-    }
-    else {
-        const html = Mustache.render(roomListTemplate, {noActiveRoomsMessage: "No active rooms found."})
-        $roomList.innerHTML = html
-    }
-})
+// socket.on('roomList', ({rooms}) => {
+//     if(rooms.length > 0) {
+//         const html = Mustache.render(roomListTemplate, {rooms, roomDetails: function() {
+//             return this.roomName + " (" + this.participantsCount + ")"
+//         }})
+//         $roomList.innerHTML = html
+//     }
+//     else {
+//         const html = Mustache.render(roomListTemplate, {noActiveRoomsMessage: "No active rooms found."})
+//         $roomList.innerHTML = html
+//     }
+// })
 
 const fetchAsync = async function () {
     const link = location.origin + '/chat/';
