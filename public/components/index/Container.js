@@ -24,7 +24,7 @@ class Container extends React.Component {
                 <div className="centered-form">
                     <LoginForm />
                 </div>
-                <div className="room-list" className='text-center'>
+                <div className='room-list text-center'>
                     <h5>Active Rooms</h5>
                     <hr></hr>
                     {this.showList()}
