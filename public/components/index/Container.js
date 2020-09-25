@@ -3,6 +3,21 @@ import LoginForm from './LoginForm'
 
 
 class Container extends React.Component {
+    
+    showList() {
+        if(this.props.rooms.length === 0) {
+            return (<h4>No Active Rooms Found</h4>)
+        }
+
+        return (<ul className="rooms">
+                {
+                    this.props.rooms.map(room => {
+                        return (<li key={room} className="room-details">{room.roomName + '(' + room.participantsCount +')' }</li>)
+                    })
+                }
+                </ul>)
+    }
+
     render() {
         return (
             <div className="main-container">
@@ -10,15 +25,9 @@ class Container extends React.Component {
                     <LoginForm />
                 </div>
                 <div className="room-list" className='text-center'>
-                    <h4>Active Rooms</h4>
+                    <h5>Active Rooms</h5>
                     <hr></hr>
-                    <ul className="rooms">
-                    {
-                        this.props.rooms.map(room => {
-                            return (<li key={room} className="room-details">{room.roomName + '(' + room.participantsCount +')' }</li>)
-                        })
-                    }
-                    </ul>
+                    {this.showList()}
                 </div>
             </div>
         )
