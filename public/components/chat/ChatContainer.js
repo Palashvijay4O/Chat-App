@@ -1,5 +1,6 @@
 import React from 'react';
 import SideBar from './SideBar'
+import MessagesContainer from './MessagesContainer'
 
 const username = localStorage.getItem('username')
 const room = localStorage.getItem('room')
@@ -14,15 +15,9 @@ class ChatContainer extends React.Component {
         }
 
         this.socket = io()
+        //console.log(typeof(this.socket))
 
         this.socket.on('roomData', ({room, users}) => {
-            // const html = Mustache.render(sideBarTemplate, {
-            //     room,
-            //     users
-            // })
-            // $sidebar.innerHTML = html
-            console.log(room);
-            console.log(users)
             this.setState({room: room, users: users});
         })
 
@@ -33,28 +28,16 @@ class ChatContainer extends React.Component {
             }
         })
     }
+
+    componentWillUnmount() {
+        this.socket.disconnect()
+    }
     render() {
         return (
             <div className="main-container">
                 <div className="chat">
                     <SideBar room={this.state.room} users={this.state.users}/>
-                    <div className="chat__main">
-                        
-                        <div id="messages" className="chat__messages">
-
-                        </div>
-                        <div id="user-typing-box" className="typing__message">
-                                
-                        </div>
-                        
-                        <div className="compose">
-                            <form id="message-form">
-                                <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autoComplete="off"></input>
-                                <button className="send-button"></button>
-                            </form>
-                            {/* <!-- <button id="send-location">Share Location</button> --> */}
-                        </div>
-                    </div>                
+                    <MessagesContainer socket={this.socket}/>
                 </div>
             </div>
         )

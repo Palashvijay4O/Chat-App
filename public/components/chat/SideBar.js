@@ -12,7 +12,6 @@ class SideBar extends React.Component {
                 <h3 className="list-title">Users</h3>
                  <ul className="users">{
                      this.props.users.map((user) => {
-                         console.log(user.username);
                          return <li><span>{user.username}</span></li>;
                      })
                  }

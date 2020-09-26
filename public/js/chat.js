@@ -9,4 +9,10 @@ ReactDOM.render(
     document.getElementById('root')
 )
 
-require('../api/chat_api')
+
+window.addEventListener('resize', () => { 
+    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+        document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+})
+
+//require('../api/chat_api')

@@ -3,71 +3,71 @@ const bcrypt = require('bcryptjs')
 // const jwt = require('jsonwebtoken')
 
 // Elements
-const $messageForm = document.querySelector('#message-form')
-const $messageFormInput = $messageForm.querySelector('input')
-const $messageFormButtom = $messageForm.querySelector('button')
+//const $messageForm = document.querySelector('#message-form')
+//const $messageFormInput = $messageForm.querySelector('input')
+//const $messageFormButtom = $messageForm.querySelector('button')
 //const $sendLocationButton = document.querySelector('#send-location')
-const $messages = document.querySelector('#messages')
+//const $messages = document.querySelector('#messages')
 //const $sidebar = document.querySelector('#sidebar')
 const $messageBox = document.querySelector('#message-box')
 const $userTypingBox = document.querySelector('#user-typing-box')
 
 // Templates
-const messageTemplate = document.querySelector('#message-template').innerHTML
-const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
+//const messageTemplate = document.querySelector('#message-template').innerHTML
+//const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 //const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
 const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
 
 // Global Constants
-const username = localStorage.getItem('username')
-const room = localStorage.getItem('room')
+// const username = localStorage.getItem('username')
+// const room = localStorage.getItem('room')
 
 // Global Variables
 var obj;
 
-const autoScroll = () => {
-    // New message element
+// const autoScroll = () => {
+//     // New message element
 
-    const $newMessage =  $messages.lastElementChild
+//     const $newMessage =  $messages.lastElementChild
     
-    // height of new message 
-    const newMessageStyles = getComputedStyle($newMessage)
-    const newMessageMargin = parseInt(newMessageStyles.marginBottom)
-    const newMessageHeight = $newMessage.offsetHeight + newMessageMargin
+//     // height of new message 
+//     const newMessageStyles = getComputedStyle($newMessage)
+//     const newMessageMargin = parseInt(newMessageStyles.marginBottom)
+//     const newMessageHeight = $newMessage.offsetHeight + newMessageMargin
 
-    // Visible height
-    const visibleHeight = $messages.offsetHeight
+//     // Visible height
+//     const visibleHeight = $messages.offsetHeight
 
-    // Height of message container
-    const containerHeight = $messages.scrollHeight
+//     // Height of message container
+//     const containerHeight = $messages.scrollHeight
 
-    // How far I have scrolled
-    const scrollOffSet = $messages.scrollTop + visibleHeight
+//     // How far I have scrolled
+//     const scrollOffSet = $messages.scrollTop + visibleHeight
 
-    if(containerHeight - newMessageHeight <= scrollOffSet) {
-        $messages.scrollTop = $messages.scrollHeight
-    }
-}
+//     if(containerHeight - newMessageHeight <= scrollOffSet) {
+//         $messages.scrollTop = $messages.scrollHeight
+//     }
+// }
 
-socket.on('locationMessage', (locationMessage) => {
-    const html = Mustache.render(locationMessageTemplate, {
-        username: locationMessage.username,
-        locationMessage: locationMessage.text,
-        createdAt: moment(locationMessage.createdAt).format('h:mm a')
-    })
-    $messages.insertAdjacentHTML('beforeend', html)
-    autoScroll()
-})
+// socket.on('locationMessage', (locationMessage) => {
+//     const html = Mustache.render(locationMessageTemplate, {
+//         username: locationMessage.username,
+//         locationMessage: locationMessage.text,
+//         createdAt: moment(locationMessage.createdAt).format('h:mm a')
+//     })
+//     $messages.insertAdjacentHTML('beforeend', html)
+//     autoScroll()
+// })
 
-socket.on('message', (message) => {
-    const html = Mustache.render(messageTemplate, {
-        username: message.username,
-        message: message.text,
-        createdAt: moment(message.createdAt).format('h:mm a')
-    })
-    $messages.insertAdjacentHTML('beforeend', html)
-    autoScroll()
-})
+// socket.on('message', (message) => {
+//     const html = Mustache.render(messageTemplate, {
+//         username: message.username,
+//         message: message.text,
+//         createdAt: moment(message.createdAt).format('h:mm a')
+//     })
+//     $messages.insertAdjacentHTML('beforeend', html)
+//     autoScroll()
+// })
 
 // socket.on('roomData', ({room, users}) => {
 //     const html = Mustache.render(sideBarTemplate, {
@@ -96,35 +96,35 @@ socket.on('typingEventClient', ({text, isTyping}) => {
 //     }
 // })
 
-$messageForm.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const message = event.target.elements.messageTxt.value
-        if(message === '') {
-            return ;
-        }
+// $messageForm.addEventListener('submit', (event) => {
+//         event.preventDefault()
+//         const message = event.target.elements.messageTxt.value
+//         if(message === '') {
+//             return ;
+//         }
 
-        $messageFormButtom.setAttribute('disabled', 'disabled')
+//         $messageFormButtom.setAttribute('disabled', 'disabled')
         
-        socket.emit('sendMessage', message, (error) => {
+//         socket.emit('sendMessage', message, (error) => {
 
-            $messageFormButtom.removeAttribute('disabled')
-            $messageFormInput.value = ''
+//             $messageFormButtom.removeAttribute('disabled')
+//             $messageFormInput.value = ''
             
-            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-                document.activeElement.blur()
-            else
-                $messageFormInput.focus()
+//             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+//                 document.activeElement.blur()
+//             else
+//                 $messageFormInput.focus()
             
-            if(error) {
-                return console.log(error)
-            }
+//             if(error) {
+//                 return console.log(error)
+//             }
             
-            // if typing is happening
-            timeout('notTypingEvent', 0)
+//             // if typing is happening
+//             timeout('notTypingEvent', 0)
 
-            console.log('The message was delivered!')
-        })
-})
+//             console.log('The message was delivered!')
+//         })
+// })
 
 
 $messageBox.addEventListener('keydown', (event) => { 
@@ -172,22 +172,22 @@ $messageBox.addEventListener('keyup', (event) => {
 //     document.querySelector('.chat__sidebar').setProperty('width', '90%');
 // })
 
-window.onload = function(event) {
-    // Can do conditional styling here
-    document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+// window.onload = function(event) {
+//     // Can do conditional styling here
+//     document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
     
-    // if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
-    //     document.querySelector('.chat__sidebar').style.setProperty('width', "20vw");
-    // else
-    //     document.querySelector('.chat__sidebar').style.setProperty('width', "auto");
+//     // if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+//     //     document.querySelector('.chat__sidebar').style.setProperty('width', "20vw");
+//     // else
+//     //     document.querySelector('.chat__sidebar').style.setProperty('width', "auto");
 
-    document.querySelector('.main-container').style.setProperty('display', 'flex');
-}
+//     document.querySelector('.main-container').style.setProperty('display', 'flex');
+// }
 
-window.addEventListener('beforeunload', (event) => {
+// window.addEventListener('beforeunload', (event) => {
     
-    socket.disconnect()
-})
+//     socket.disconnect()
+// })
 
 $('#confirmDeletePopup .modal-footer button').on('click', (event) => {
     var $button = $(event.target)
@@ -236,9 +236,4 @@ $('#copyInvite').on('click', (event) => {
     } catch {
         return;
     }
-})
-
-window.addEventListener('resize', () => { 
-    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
-        document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
 })
