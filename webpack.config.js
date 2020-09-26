@@ -1,6 +1,8 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
   entry: {
     index: './public/js/index.js',
     chat: './public/js/chat.js'
@@ -21,9 +23,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'css-loader'
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ]
   },
-  target: 'node'
+  target: 'node',
+  watch: true
 };

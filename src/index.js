@@ -1,6 +1,8 @@
 const express = require('express')
 const http = require('http')
 const path = require('path')
+var compression = require('compression');
+const jwt = require('jsonwebtoken')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 
@@ -8,22 +10,45 @@ const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = require('./utils/users')
 
 const htmlDir = path.join(__dirname, '../public')
+
 const port = process.env.PORT || 3000
 
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-//app.set('view engine', 'html');
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 app.use(express.json())
 app.use(express.static(htmlDir))
+app.use(compression())
 
-// app.get('/', (req, res) => {
-//     res.render('index')
-// })
 
 app.post('/chat.html', async (req, res) => {
-    res.redirect('/chat.html')
+    res.sendFile(path.join(__dirname, '../public/chat.html'))
+})
+
+app.post('/invite/', async (req, res) => {
+    
+    const body = req.body
+    
+    const uname = await jwt.sign(body, 'palash');
+    const rname = await jwt.sign(body.room, 'palash');
+    
+    const responseSigned = {
+        username: uname,
+        room: rname
+    }
+    
+    res.send({responseSigned})
+})
+
+app.get('/join/', async(req, res) => {
+    const secretkey = req.query.q.split('::')
+    //const a = await jwt.sign(req.query.split('::'))
+    const a = await jwt.decode(secretkey[0], 'palash'), b = await jwt.decode(secretkey[0], 'palash');
+    res.send(JSON.stringify({a, b}))
 })
 
 io.on('connection', (socket) => {
