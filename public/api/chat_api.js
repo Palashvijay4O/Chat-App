@@ -1,5 +1,5 @@
-const socket = io()
-const bcrypt = require('bcryptjs')
+//const socket = io()
+//const bcrypt = require('bcryptjs')
 // const jwt = require('jsonwebtoken')
 
 // Elements
@@ -9,21 +9,21 @@ const bcrypt = require('bcryptjs')
 //const $sendLocationButton = document.querySelector('#send-location')
 //const $messages = document.querySelector('#messages')
 //const $sidebar = document.querySelector('#sidebar')
-const $messageBox = document.querySelector('#message-box')
-const $userTypingBox = document.querySelector('#user-typing-box')
+//const $messageBox = document.querySelector('#message-box')
+//const $userTypingBox = document.querySelector('#user-typing-box')
 
 // Templates
 //const messageTemplate = document.querySelector('#message-template').innerHTML
 //const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 //const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
-const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
+//const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
 
 // Global Constants
 // const username = localStorage.getItem('username')
 // const room = localStorage.getItem('room')
 
 // Global Variables
-var obj;
+//var obj;
 
 // const autoScroll = () => {
 //     // New message element
@@ -77,17 +77,17 @@ var obj;
 //     $sidebar.innerHTML = html
 // })
 
-socket.on('typingEventClient', ({text, isTyping}) => {
-    //console.log(message)
-    if(isTyping) {
-        const html = Mustache.render(userTypingTemplate, {message: text})
-        $userTypingBox.innerHTML = html
-    }
-    else {
-        const html = Mustache.render(userTypingTemplate, {message: text})
-        $userTypingBox.innerHTML = ''
-    }
-})
+// socket.on('typingEventClient', ({text, isTyping}) => {
+//     //console.log(message)
+//     if(isTyping) {
+//         const html = Mustache.render(userTypingTemplate, {message: text})
+//         $userTypingBox.innerHTML = html
+//     }
+//     else {
+//         const html = Mustache.render(userTypingTemplate, {message: text})
+//         $userTypingBox.innerHTML = ''
+//     }
+// })
 
 // socket.emit('join', {username, room}, (error) => {
 //     if(error) {
@@ -127,33 +127,33 @@ socket.on('typingEventClient', ({text, isTyping}) => {
 // })
 
 
-$messageBox.addEventListener('keydown', (event) => { 
-    // Need promise based implementation here as well
-    if(obj) {
-        obj.cancel()
-    }
+// $messageBox.addEventListener('keydown', (event) => { 
+//     // Need promise based implementation here as well
+//     if(obj) {
+//         obj.cancel()
+//     }
 
-    timeout('typingEvent', 500)
-})
+//     timeout('typingEvent', 500)
+// })
 
-const timeout = (emitEvent, ms) => {
-    var timeOut, promise
+// const timeout = (emitEvent, ms) => {
+//     var timeOut, promise
 
-    promise = new Promise((resolve, reject) => {
-        timeOut = setTimeout(() => {
-            resolve(socket.emit(emitEvent))
-        }, ms)
-    })
+//     promise = new Promise((resolve, reject) => {
+//         timeOut = setTimeout(() => {
+//             resolve(socket.emit(emitEvent))
+//         }, ms)
+//     })
 
-    return {
-        promise,
-        cancel: function() { clearTimeout(timeOut) }
-    }
-}
+//     return {
+//         promise,
+//         cancel: function() { clearTimeout(timeOut) }
+//     }
+// }
 
-$messageBox.addEventListener('keyup', (event) => {
-    obj = timeout('notTypingEvent', 3000)
-})
+// $messageBox.addEventListener('keyup', (event) => {
+//     obj = timeout('notTypingEvent', 3000)
+// })
 
 // $sendLocationButton.addEventListener('click', (event) => {
 //     if(!navigator.geolocation) {
@@ -189,51 +189,4 @@ $messageBox.addEventListener('keyup', (event) => {
 //     socket.disconnect()
 // })
 
-$('#confirmDeletePopup .modal-footer button').on('click', (event) => {
-    var $button = $(event.target)
-    if($button.attr('id') === 'confirm-yes') {
-        socket.emit('disconnet')
-        location.href = '/'
-        return;
-    }
-})
 
-const fetchLink = async function () {
-    const link = location.origin + '/invite/';
-    
-    const response = await fetch(link, {method: 'POST', headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                username: 'jyoti',
-                room: 'oracle'
-            })
-        })
-    
-    return response.json()
-}
-
-
-
-$('#invitationPopup').on('show.bs.modal', (event) => {
-    // Encryption here
-    
-    const link = location.origin + '/join/';
-    fetchLink().then((data) => {
-        const queryString = data.responseSigned.username + '::' + data.responseSigned.room;
-        $('#inviteLink').prop('value', link + '?q=' + queryString)
-    });
-
-})
-
-$('#copyInvite').on('click', (event) => {
-    var link = document.getElementById('inviteLink')
-    link.select()
-    link.setSelectionRange(0, 99999);
-
-    try {
-        document.execCommand('copy');
-    } catch {
-        return;
-    }
-})

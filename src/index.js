@@ -11,7 +11,6 @@ const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = req
 
 const htmlDir = path.join(__dirname, '../public')
 
-console.log("htmlDir", htmlDir)
 const port = process.env.PORT || 3000
 
 const app = express()

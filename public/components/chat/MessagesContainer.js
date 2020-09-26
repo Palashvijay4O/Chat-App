@@ -1,14 +1,14 @@
 import React from 'react';
 
-var $messages;
-
+var $messages, obj; 
 class MessagesContainer extends React.Component {
     
     constructor(props) {
         super(props)
 
         this.state = {
-            messages: []
+            messages: [],
+            typingMessage: ''
         }
         this.socket = this.props.socket
 
@@ -44,6 +44,43 @@ class MessagesContainer extends React.Component {
                 }
             });
         }
+
+        this.timeout = (emitEvent, ms) => {
+            var timeOut, promise
+        
+            promise = new Promise((resolve, reject) => {
+                timeOut = setTimeout(() => {
+                    resolve(this.socket.emit(emitEvent))
+                }, ms)
+            })
+        
+            return {
+                promise,
+                cancel: function() { clearTimeout(timeOut) }
+            }
+        }
+
+        this.handleKeyDown = event => {
+            if(obj) {
+                obj.cancel()
+            }
+        
+            this.timeout('typingEvent', 500)
+        }
+
+        this.handleKeyUp = event => {
+            obj = this.timeout('notTypingEvent', 3000)
+        }
+
+        this.socket.on('typingEventClient', ({text, isTyping}) => {
+            console.log(text)
+            if(isTyping) {
+                this.setState({typingMessage : text})
+            }
+            else {
+                this.setState({typingMessage : ''})
+            }
+        })
     }
 
     componentDidMount() {
@@ -90,11 +127,17 @@ class MessagesContainer extends React.Component {
                             )
                         })}
                     </div>
-                    <div id="user-typing-box" className="typing__message"> </div>
+                    <div id="user-typing-box" className="typing__message">
+                        <div>
+                            <p>
+                                {this.state.typingMessage}
+                            </p>
+                        </div>
+                    </div>
                             
                     <div className="compose">
                         <form id="message-form" onSubmit={this.handleSend}>
-                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." required autoComplete="off"></input>
+                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." required autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
                             <button id="send-button" className="send-button"></button>
                         </form>
                         {/* <!-- <button id="send-location">Share Location</button> --> */}
