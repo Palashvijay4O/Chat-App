@@ -39,11 +39,6 @@ input {
 }
 
 
-button:hover {
-    /* background: #6b47b8; */
-    opacity: 0.4;
-}
-
 button:disabled {
     cursor: default;
     /* background: #7c5cbf94; */

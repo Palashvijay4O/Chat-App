@@ -31,8 +31,8 @@ const fetchLink = async function () {
             'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                username: 'jyoti',
-                room: 'oracle'
+                //username: 'jyoti',
+                room: localStorage.getItem('room')
             })
         })
     
@@ -42,11 +42,9 @@ const fetchLink = async function () {
 
 
 $('#invitationPopup').on('show.bs.modal', (event) => {
-    // Encryption here
-    
-    const link = location.origin + '/join/';
+    const link = location.origin + '/';
     fetchLink().then((data) => {
-        const queryString = data.responseSigned.username + '::' + data.responseSigned.room;
+        const queryString = data.responseSigned.room;
         $('#inviteLink').prop('value', link + '?q=' + queryString)
     });
 

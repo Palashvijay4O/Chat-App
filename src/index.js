@@ -9,7 +9,7 @@ const Filter = require('bad-words')
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser, removeUser, getUser, getUsersInRoom, getListOfActiveRooms} = require('./utils/users')
 
-const htmlDir = path.join(__dirname, '../public')
+const htmlDir = path.join(__dirname, '../public/')
 
 const port = process.env.PORT || 3000
 
@@ -33,22 +33,25 @@ app.post('/invite/', async (req, res) => {
     
     const body = req.body
     
-    const uname = await jwt.sign(body, 'palash');
+    //const uname = await jwt.sign(body.username, 'palash');
     const rname = await jwt.sign(body.room, 'palash');
     
     const responseSigned = {
-        username: uname,
+        //username: uname,
         room: rname
     }
     
     res.send({responseSigned})
 })
 
-app.get('/join/', async(req, res) => {
-    const secretkey = req.query.q.split('::')
-    //const a = await jwt.sign(req.query.split('::'))
-    const a = await jwt.decode(secretkey[0], 'palash'), b = await jwt.decode(secretkey[0], 'palash');
-    res.send(JSON.stringify({a, b}))
+app.post('/inviteDetails/', async (req, res) => {
+    const secretkey = req.body.id
+    const room = await jwt.decode(secretkey, 'palash');
+    res.send({room});
+})
+
+app.get('/*', async(req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
 io.on('connection', (socket) => {
