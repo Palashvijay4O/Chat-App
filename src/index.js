@@ -25,11 +25,6 @@ app.use(express.json())
 app.use(express.static(htmlDir))
 app.use(compression())
 
-//app.set('view engine', 'html');
-
-// app.get('/', (req, res) => {
-//     res.render('index')
-// })
 
 app.post('/chat.html', async (req, res) => {
     res.sendFile(path.join(__dirname, '../public/chat.html'))

@@ -6,7 +6,7 @@ class MessagesContainer extends React.Component {
     
     constructor(props) {
         super(props)
-        
+
         this.state = {
             messages: []
         }
@@ -29,21 +29,20 @@ class MessagesContainer extends React.Component {
             let message = event.target.elements.messageTxt.value;
             if (message === '')
                 return;
-            
+            document.getElementById('send-button').setAttribute('disabled', 'disabled')
             this.socket.emit('sendMessage', message, (error) => {
+                document.getElementById('send-button').removeAttribute('disabled')
+                document.querySelector('#message-box').value = '';
+
                 if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
                     document.activeElement.blur()
                 else
                     document.querySelector('#message-box').focus()
-                
-                
-                
+                 
                 if(error) {
                     return console.log(error)
                 }
             });
-            
-            event.target.elements.messageTxt.value = '';
         }
     }
 
@@ -79,9 +78,9 @@ class MessagesContainer extends React.Component {
         return (
             <div className="chat__main">
                     <div id="messages" className="chat__messages">
-                        {this.state.messages.map((message) => {
+                        {this.state.messages.map((message, i) => {
                             return (
-                                <div className="message">
+                                <div key={i} className="message">
                                     <p>
                                         <span className="message__name">{message.username}</span>
                                         <span className="message__meta">{message.createdAt}</span>
@@ -91,13 +90,12 @@ class MessagesContainer extends React.Component {
                             )
                         })}
                     </div>
-                    <div id="user-typing-box" className="typing__message">
-                    </div>
+                    <div id="user-typing-box" className="typing__message"> </div>
                             
                     <div className="compose">
                         <form id="message-form" onSubmit={this.handleSend}>
-                            <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autoComplete="off"></input>
-                            <button className="send-button"></button>
+                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." required autoComplete="off"></input>
+                            <button id="send-button" className="send-button"></button>
                         </form>
                         {/* <!-- <button id="send-location">Share Location</button> --> */}
                     </div>

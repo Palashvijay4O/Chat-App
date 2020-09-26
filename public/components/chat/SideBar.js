@@ -12,7 +12,7 @@ class SideBar extends React.Component {
                 <h3 className="list-title">Users</h3>
                  <ul className="users">{
                      this.props.users.map((user) => {
-                         return <li><span>{user.username}</span></li>;
+                         return <li key={user.username}><span>{user.username}</span></li>;
                      })
                  }
                 </ul>
