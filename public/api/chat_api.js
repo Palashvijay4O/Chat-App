@@ -8,14 +8,14 @@ const $messageFormInput = $messageForm.querySelector('input')
 const $messageFormButtom = $messageForm.querySelector('button')
 //const $sendLocationButton = document.querySelector('#send-location')
 const $messages = document.querySelector('#messages')
-const $sidebar = document.querySelector('#sidebar')
+//const $sidebar = document.querySelector('#sidebar')
 const $messageBox = document.querySelector('#message-box')
 const $userTypingBox = document.querySelector('#user-typing-box')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
-const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
+//const sideBarTemplate = document.querySelector('#sidebar-template').innerHTML
 const userTypingTemplate = document.querySelector('#user-typing-template').innerHTML
 
 // Global Constants
@@ -69,13 +69,13 @@ socket.on('message', (message) => {
     autoScroll()
 })
 
-socket.on('roomData', ({room, users}) => {
-    const html = Mustache.render(sideBarTemplate, {
-        room,
-        users
-    })
-    $sidebar.innerHTML = html
-})
+// socket.on('roomData', ({room, users}) => {
+//     const html = Mustache.render(sideBarTemplate, {
+//         room,
+//         users
+//     })
+//     $sidebar.innerHTML = html
+// })
 
 socket.on('typingEventClient', ({text, isTyping}) => {
     //console.log(message)
@@ -89,12 +89,12 @@ socket.on('typingEventClient', ({text, isTyping}) => {
     }
 })
 
-socket.emit('join', {username, room}, (error) => {
-    if(error) {
-        alert(error)
-        location.href = '/'
-    }
-})
+// socket.emit('join', {username, room}, (error) => {
+//     if(error) {
+//         alert(error)
+//         location.href = '/'
+//     }
+// })
 
 $messageForm.addEventListener('submit', (event) => {
         event.preventDefault()

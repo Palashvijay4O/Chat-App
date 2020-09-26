@@ -23,31 +23,7 @@
         <div class="container-fluid" id="root">
 
         </div>
-        <div class="main-container">
-            <div class="chat">
-                <div id="sidebar" class="chat__sidebar">
-
-                </div>    
-                <div class="chat__main">
-                    
-                    <div id="messages" class="chat__messages">
-
-                    </div>
-                    <div id="user-typing-box" class="typing__message">
-                            
-                    </div>
-                    
-                    <div class="compose">
-                        <form id="message-form">
-                            <input id="message-box" type="text" name="messageTxt" placeholder="Type something...." required autocomplete="off">
-                            <button class="send-button"></button>
-                        </form>
-                        <!-- <button id="send-location">Share Location</button> -->
-                    </div>
-                </div>                
-            
-            </div>
-        </div>
+        
         <!-- popup for delete -->
         <div class="modal" id="confirmDeletePopup">
             <div class="modal-dialog">
@@ -110,7 +86,7 @@
             </div>
         </script>
 
-        <script id="sidebar-template" type="text/html">
+        <!-- <script id="sidebar-template" type="text/html">
             <h2 class="room-title">{{room}}</h2>
             <h3 class="list-title">Users</h3>
             <ul class="users">
@@ -120,7 +96,7 @@
                     </li>
                 {{/users}}
             </ul>
-        </script>
+        </script> -->
 
         <script id="user-typing-template" type="text/html">
             <div>
