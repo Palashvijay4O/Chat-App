@@ -27,12 +27,16 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+
         document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
         document.querySelector('.main-container').style.setProperty('display', 'flex');
 
         window.addEventListener('resize', (event) => { 
         document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
         })
+        
+        document.querySelector('#loading').remove()
+        
     }
 
     componentWillUnmount() {
