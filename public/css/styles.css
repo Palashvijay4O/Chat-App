@@ -357,3 +357,10 @@ button {
     width: 20%;
     transition: background .3s ease;
 }
+
+.center {
+    margin-top: calc(40 * var(--vh));;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
