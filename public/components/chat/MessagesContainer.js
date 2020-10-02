@@ -1,8 +1,12 @@
 import React from 'react';
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-toast.configure()
+//import { ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.css';
+//toast.configure()
+
+// import UIfx from 'uifx';
+// import mp3File from './../../sounds/juntos.mp3';
+
 
 
 var $messages, obj; 
@@ -10,7 +14,7 @@ class MessagesContainer extends React.Component {
     
     constructor(props) {
         super(props)
-
+        //this.beep = new UIfx({asset: mp3File});
         this.state = {
             messages: [],
             typingMessage: ''
@@ -27,6 +31,10 @@ class MessagesContainer extends React.Component {
                 messages: [...this.state.messages, messageObj]
             })
             this.autoScroll()
+            //this.beep.play()
+            document.getElementById('notification').autoplay = true;
+            document.getElementById('notification').load()
+            //document.getElementById('notification').play()
         })
 
         this.handleSend = event => {
@@ -78,7 +86,7 @@ class MessagesContainer extends React.Component {
         }
 
         this.socket.on('typingEventClient', ({text, isTyping}) => {
-            console.log(text)
+
             if(isTyping) {
                 this.setState({typingMessage : text})
             }
