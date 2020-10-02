@@ -4,7 +4,7 @@ class SideBar extends React.Component {
     constructor(props) {
         super(props)
     }
-
+    
     render() {
         return (
             <div id="sidebar" className="chat__sidebar">
