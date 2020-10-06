@@ -16,9 +16,9 @@ function swipedetect(el, callback){
     startY,
     distX,
     distY,
-    threshold = 150, //required min distance traveled to be considered swipe
-    restraint = 300, // maximum distance allowed at the same time in perpendicular direction
-    allowedTime = 300, // maximum time allowed to travel that distance
+    threshold = 200, //required min distance traveled to be considered swipe
+    restraint = 400, // maximum distance allowed at the same time in perpendicular direction
+    allowedTime = 500, // maximum time allowed to travel that distance
     elapsedTime,
     startTime,
     handleswipe = callback || function(swipedir){}
@@ -30,12 +30,18 @@ function swipedetect(el, callback){
         startX = touchobj.pageX
         startY = touchobj.pageY
         startTime = new Date().getTime() // record time when finger first makes contact with surface
-        e.preventDefault()
+        //e.preventDefault()
     }, false)
   
-    touchsurface.addEventListener('touchmove', function(e){
-        e.preventDefault() // prevent scrolling when inside DIV
-    }, false)
+    // touchsurface.addEventListener('touchmove', function(e){
+    //     let o = e.changedTouches[0]
+    //     if(o.pageX - startX > 0) {
+    //          e.preventDefault()
+    //          // prevent scrolling when inside DIV
+    //     } else {
+    //         return ; 
+    //     }
+    // }, false)
   
     touchsurface.addEventListener('touchend', function(e){
         var touchobj = e.changedTouches[0]
@@ -51,7 +57,8 @@ function swipedetect(el, callback){
             }
         }
         handleswipe(swipedir)
-        e.preventDefault()
+        //if(swipedir === 'left' || swipedir === 'right')
+        //e.preventDefault()
     }, false)
 }
 
@@ -163,7 +170,6 @@ class MessagesContainer extends React.Component {
             })
 
             swipedetect(el2, function(swipedir){
-                //swipedir contains either "none", "left", "right", "top", or "down"
                 if (swipedir === 'left') {
                     //alert('You just swiped left!');
                     document.getElementById('sidebar').style.setProperty('display', 'none');
