@@ -7,60 +7,60 @@ import React from 'react';
 // import UIfx from 'uifx';
 // import mp3File from './../../sounds/juntos.mp3';
 const isMobileAgent = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
-function swipedetect(el, callback){
+// function swipedetect(el, callback){
   
-    var touchsurface = el,
-    dist,
-    swipedir,
-    startX,
-    startY,
-    distX,
-    distY,
-    threshold = 200, //required min distance traveled to be considered swipe
-    restraint = 400, // maximum distance allowed at the same time in perpendicular direction
-    allowedTime = 500, // maximum time allowed to travel that distance
-    elapsedTime,
-    startTime,
-    handleswipe = callback || function(swipedir){}
+//     var touchsurface = el,
+//     dist,
+//     swipedir,
+//     startX,
+//     startY,
+//     distX,
+//     distY,
+//     threshold = 200, //required min distance traveled to be considered swipe
+//     restraint = 400, // maximum distance allowed at the same time in perpendicular direction
+//     allowedTime = 500, // maximum time allowed to travel that distance
+//     elapsedTime,
+//     startTime,
+//     handleswipe = callback || function(swipedir){}
   
-    touchsurface.addEventListener('touchstart', function(e){
-        var touchobj = e.changedTouches[0]
-        swipedir = 'none'
-        dist = 0
-        startX = touchobj.pageX
-        startY = touchobj.pageY
-        startTime = new Date().getTime() // record time when finger first makes contact with surface
-        //e.preventDefault()
-    }, false)
+//     touchsurface.addEventListener('touchstart', function(e){
+//         var touchobj = e.changedTouches[0]
+//         swipedir = 'none'
+//         dist = 0
+//         startX = touchobj.pageX
+//         startY = touchobj.pageY
+//         startTime = new Date().getTime() // record time when finger first makes contact with surface
+//         //e.preventDefault()
+//     }, false)
   
-    // touchsurface.addEventListener('touchmove', function(e){
-    //     let o = e.changedTouches[0]
-    //     if(o.pageX - startX > 0) {
-    //          e.preventDefault()
-    //          // prevent scrolling when inside DIV
-    //     } else {
-    //         return ; 
-    //     }
-    // }, false)
+//     // touchsurface.addEventListener('touchmove', function(e){
+//     //     let o = e.changedTouches[0]
+//     //     if(o.pageX - startX > 0) {
+//     //          e.preventDefault()
+//     //          // prevent scrolling when inside DIV
+//     //     } else {
+//     //         return ; 
+//     //     }
+//     // }, false)
   
-    touchsurface.addEventListener('touchend', function(e){
-        var touchobj = e.changedTouches[0]
-        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-        elapsedTime = new Date().getTime() - startTime // get time elapsed
-        if (elapsedTime <= allowedTime){ // first condition for awipe met
-            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-                swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
-            }
-            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-                swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
-            }
-        }
-        handleswipe(swipedir)
-        //if(swipedir === 'left' || swipedir === 'right')
-        //e.preventDefault()
-    }, false)
-}
+//     touchsurface.addEventListener('touchend', function(e){
+//         var touchobj = e.changedTouches[0]
+//         distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+//         distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+//         elapsedTime = new Date().getTime() - startTime // get time elapsed
+//         if (elapsedTime <= allowedTime){ // first condition for awipe met
+//             if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+//                 swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+//             }
+//             else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+//                 swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+//             }
+//         }
+//         handleswipe(swipedir)
+//         //if(swipedir === 'left' || swipedir === 'right')
+//         //e.preventDefault()
+//     }, false)
+// }
 
 
 
@@ -69,7 +69,7 @@ class MessagesContainer extends React.Component {
     
     constructor(props) {
         super(props)
-        //this.beep = new UIfx({asset: mp3File});
+
         this.state = {
             messages: [],
             typingMessage: ''
@@ -86,10 +86,10 @@ class MessagesContainer extends React.Component {
                 messages: [...this.state.messages, messageObj]
             })
             this.autoScroll()
-            //this.beep.play()
+
+            // play the notification sound
             document.getElementById('notification').autoplay = true;
             document.getElementById('notification').load()
-            //document.getElementById('notification').play()
         })
 
         this.handleSend = event => {
@@ -153,33 +153,33 @@ class MessagesContainer extends React.Component {
 
     componentDidMount() {
         $messages = document.querySelector('#messages')
-        var $sidebar = document.querySelector('#sidebar')
-        if(isMobileAgent) {
-            var el1 = $messages, el2 = $sidebar
+        // var $sidebar = document.querySelector('#sidebar')
+        // if(isMobileAgent) {
+        //     var el1 = $messages, el2 = $sidebar
 
             
-            swipedetect(el1, function(swipedir){
-            //swipedir contains either "none", "left", "right", "top", or "down"
-                if (swipedir === 'right') {
-                    //alert('You just swiped right!');
-                    document.getElementById('sidebar').style.setProperty('display', 'block');
-                    document.getElementById('chat-main').style.setProperty('display', 'none');
-                    document.getElementById('sidebar').style.setProperty('width', '100vw');
-                    document.getElementById('chat-main').style.setProperty('width', '0vw');
-                }
-            })
+        //     swipedetect(el1, function(swipedir){
+        //     //swipedir contains either "none", "left", "right", "top", or "down"
+        //         if (swipedir === 'right') {
+        //             //alert('You just swiped right!');
+        //             document.getElementById('sidebar').style.setProperty('display', 'block');
+        //             document.getElementById('chat-main').style.setProperty('display', 'none');
+        //             document.getElementById('sidebar').style.setProperty('width', '100vw');
+        //             document.getElementById('chat-main').style.setProperty('width', '0vw');
+        //         }
+        //     })
 
-            swipedetect(el2, function(swipedir){
-                if (swipedir === 'left') {
-                    //alert('You just swiped left!');
-                    document.getElementById('sidebar').style.setProperty('display', 'none');
-                    document.getElementById('chat-main').style.setProperty('display', 'flex');
-                    document.getElementById('sidebar').style.setProperty('width', '0vw');
-                    document.getElementById('chat-main').style.setProperty('width', '100vw');
-                }
-            })
+        //     swipedetect(el2, function(swipedir){
+        //         if (swipedir === 'left') {
+        //             //alert('You just swiped left!');
+        //             document.getElementById('sidebar').style.setProperty('display', 'none');
+        //             document.getElementById('chat-main').style.setProperty('display', 'flex');
+        //             document.getElementById('sidebar').style.setProperty('width', '0vw');
+        //             document.getElementById('chat-main').style.setProperty('width', '100vw');
+        //         }
+        //     })
             
-        }
+        // }
     }
 
     autoScroll() {

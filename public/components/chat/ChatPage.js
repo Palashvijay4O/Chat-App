@@ -12,15 +12,17 @@ class ChatPage extends React.Component {
         document.querySelector('.main-container').style.setProperty('display', 'flex');
 
         window.addEventListener('resize', () => { 
-            if(!isMobileAgent)
+            if(!isMobileAgent) {
                 document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
+                document.querySelector(':root').style.setProperty('--vw', window.innerWidth/100 + 'px');
+            }
         })
 
         document.querySelector('#loading').remove();
 
-        if(isMobileAgent) {
-            document.getElementById('sidebar').style.setProperty('display', 'none');
-        }
+        // if(isMobileAgent) {
+        //     document.getElementById('sidebar').style.setProperty('display', 'none');
+        // }
         
     }
 

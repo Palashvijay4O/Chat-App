@@ -76,15 +76,17 @@ button:disabled {
 /* Chat Page Layout */
 
 .chat {
-    display: flex;
+    display: block;
     width: 100%;
+    height: calc(85 * var(--vh));
 }
 
 .chat__sidebar {
-    height: calc(90 * var(--vh));
+    display: block;
+    height: calc(85 * var(--vh));
     color: white;
     background: #333744;
-    width:10vw;
+    width: calc(100 * var(--vw));
     overflow-y: scroll;
     /* transition-property: width;
     transition-duration: 2s; */
@@ -92,19 +94,22 @@ button:disabled {
     /* , height 1s ease-in-out;  */
 }
 
-.chat__sidebar:hover {
+/* .chat__sidebar:hover {
     width: 95vw;
     /* height: calc(90 * var(--vh)); */
-}
+/*} */
 /* Chat styles */
 
+
+
 .chat__main {
-    flex-grow: 1;
     display: flex;
+    flex-grow: 1;
     /* background-image: url('../img/background-img.jpg'); */
     flex-direction: column;
-    max-height: calc(90 * var(--vh));
-    width: 100%;
+    max-height: calc(85 * var(--vh));
+    height: calc(85 * var(--vh));
+    width: calc(100 * var(--vw));
     border: 1px solid;
     margin: 0px 5px 0px 5px;
     border-radius: 5px;
@@ -112,7 +117,7 @@ button:disabled {
 }
 
 .chat__messages {
-    flex-grow: 1;
+    height: calc(80 * var(--vh));
     padding: 24px 24px 10px 12px;
     overflow-y: scroll;
 }
@@ -248,7 +253,7 @@ button:disabled {
 .main-container {
     display: none;
     height: calc(90 * var(--vh));
-    width: 100%;
+    width: calc(100 * var(--vw));
     /* border-top: 1px solid; */
 }
 
