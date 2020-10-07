@@ -41,7 +41,6 @@ input {
 
 button:disabled {
     cursor: default;
-    /* background: #7c5cbf94; */
     opacity: 0.5;
 }
 
@@ -88,16 +87,8 @@ button:disabled {
     background: #333744;
     width: calc(100 * var(--vw));
     overflow-y: scroll;
-    /* transition-property: width;
-    transition-duration: 2s; */
     transition: width 1s ease-in-out;
-    /* , height 1s ease-in-out;  */
 }
-
-/* .chat__sidebar:hover {
-    width: 95vw;
-    /* height: calc(90 * var(--vh)); */
-/*} */
 /* Chat styles */
 
 
@@ -105,7 +96,6 @@ button:disabled {
 .chat__main {
     display: flex;
     flex-grow: 1;
-    /* background-image: url('../img/background-img.jpg'); */
     flex-direction: column;
     max-height: calc(85 * var(--vh));
     height: calc(85 * var(--vh));
@@ -372,4 +362,19 @@ button {
 
 audio {
     display: none;
+}
+
+a {
+    width: 33%;
+    text-align: center;
+    font-weight: 500;
+    color: inherit;
+}
+
+a:hover  {
+    color: inherit;
+}
+
+a:focus{
+    outline: 0;
 }

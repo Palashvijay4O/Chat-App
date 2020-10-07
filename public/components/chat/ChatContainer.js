@@ -38,16 +38,17 @@ class ChatContainer extends React.Component {
         return (
             <div className="main-container">
                 <div className="chat">
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-                    <Tab eventKey="home" title="Users">
+                    <Tabs defaultActiveKey="chat" id="uncontrolled-tab">
+                    <Tab eventKey="users" title="Users" className="chat-page-tab">
                         <SideBar room={this.state.room} users={this.state.users}/>
                     </Tab>
-                    <Tab eventKey="profile" title="Chat">
+                    <Tab eventKey="chat" title="Chat" className="chat-page-tab">
+                        <MessagesContainer socket={this.socket}/>
+                    </Tab>
+                    <Tab eventKey="settings" title="Preferences" disabled className="chat-page-tab">
                         <MessagesContainer socket={this.socket}/>
                     </Tab>
                     </Tabs>
-                    {/* <SideBar room={this.state.room} users={this.state.users}/>
-                    <MessagesContainer socket={this.socket}/> */}
                 </div>
             </div>
         )
