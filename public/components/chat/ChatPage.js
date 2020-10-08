@@ -19,10 +19,6 @@ class ChatPage extends React.Component {
         })
 
         document.querySelector('#loading').remove();
-
-        // if(isMobileAgent) {
-        //     document.getElementById('sidebar').style.setProperty('display', 'none');
-        // }
         
     }
 

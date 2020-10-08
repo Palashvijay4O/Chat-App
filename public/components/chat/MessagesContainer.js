@@ -1,4 +1,6 @@
 import React from 'react';
+import Toast from 'react-bootstrap/Toast'
+import ToastHeader from 'react-bootstrap/ToastHeader'
 
 //import { ToastContainer, toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';
@@ -69,19 +71,26 @@ class MessagesContainer extends React.Component {
     
     constructor(props) {
         super(props)
-
         this.state = {
             messages: [],
-            typingMessage: ''
+            typingMessage: '',
+            notificationState: {
+                show: true,
+                display: 'none'
+            }
         }
         this.socket = this.props.socket
 
         this.socket.on('message', (message) => {
+            if(!message.text) {
+                this.setState({notificationState: {'show': true, 'display' : 'block'}})
+            }
             const messageObj = {
                 username: message.username,
                 text: message.text,
                 createdAt: moment(message.createdAt).format('h:mm a')
             }
+
             this.setState({
                 messages: [...this.state.messages, messageObj]
             })
@@ -209,7 +218,15 @@ class MessagesContainer extends React.Component {
     render() {
         return (
             <div id="chat-main" className="chat__main">
-                
+                    <div aria-live="polite" aria-atomic="true" style={{display: this.state.notificationState.display, position: 'absolute',  top: '20px' , right: '0', minHeight: '50px', zIndex: 2, width: 'calc(30 * var(--vw))'}}>
+                            <Toast onClose={() => this.setState({notificationState: {'show': false, 'display' : 'none'}})} show={this.state.notificationState.show} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="mr-auto">Notification</strong>
+                                <small>just now</small>
+                            </Toast.Header>
+                            <Toast.Body>Someone has joined the chat!</Toast.Body>
+                            </Toast>
+                    </div>
                     <div id="messages" className="chat__messages">
                         {this.state.messages.map((message, i) => {
                             return (
@@ -218,7 +235,7 @@ class MessagesContainer extends React.Component {
                                         <span className="message__name">{message.username}</span>
                                         <span className="message__meta">{message.createdAt}</span>
                                     </p>
-                                    <p>{message.text}</p>
+                                    {message.text ? <p>{message.text}</p> : ''}
                                 </div>
                             )
                         })}

@@ -110,6 +110,7 @@ button:disabled {
     height: calc(80 * var(--vh));
     padding: 24px 24px 10px 12px;
     overflow-y: scroll;
+    z-index: 1;
 }
 
 /* Message Styles */
