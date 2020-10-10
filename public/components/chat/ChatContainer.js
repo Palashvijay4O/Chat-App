@@ -16,7 +16,7 @@ class ChatContainer extends React.Component {
             users: []
         }
         
-        this.socket = io()
+        this.socket = io({transports: ['websocket']})
         //console.log(typeof(this.socket))
 
         this.socket.on('roomData', ({room, users}) => {
@@ -29,6 +29,7 @@ class ChatContainer extends React.Component {
                 location.href = '/'
             }
         })
+        
     }
     componentDidMount() {
         document.querySelector('a[aria-selected="true"]').style.backgroundColor = '#4aa1ff';
