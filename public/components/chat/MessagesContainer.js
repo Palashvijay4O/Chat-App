@@ -102,7 +102,7 @@ class MessagesContainer extends React.Component {
         this.handleSend = event => {
             event.preventDefault()
             let message = event.target.elements.messageTxt.value;
-            let file = document.getElementById('send-file').files[0].slice(0,500000, "image/png")
+            let file = document.getElementById('send-file').files[0]
             
             if (message === '' && !file)
                 return;
