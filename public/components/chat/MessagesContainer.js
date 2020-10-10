@@ -273,16 +273,16 @@ class MessagesContainer extends React.Component {
                             
                     <div className="compose">
                         <form id="message-form" onSubmit={this.handleSend} encType="multipart/form-data">
-                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
+                            {/* <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
                             <button id="send-button" className="send-button"></button>
-                            <input type="file" id="send-file" name="send-file" className="attachFile"/>
-                            {/* <div style={{display : 'block', flexGrow: 1}}>
+                            <input type="file" id="send-file" name="send-file" className="attachFile"/> */}
+                            <div style={{display : 'block', flexGrow: 1}}>
                                 <div style={{display : 'flex'}}>
                                     <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
                                     <button id="send-button" className="send-button"></button>
                                 </div>
                                 <input type="file" id="send-file" name="send-file" className="attachFile"/>
-                            </div> */}
+                            </div>
                         </form>
                         {/* <!-- <button id="send-location">Share Location</button> --> */}
                     </div>
