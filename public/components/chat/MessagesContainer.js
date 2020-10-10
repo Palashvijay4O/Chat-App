@@ -102,7 +102,7 @@ class MessagesContainer extends React.Component {
         this.handleSend = event => {
             event.preventDefault()
             let message = event.target.elements.messageTxt.value;
-            let file = document.getElementById('send-file').files[0]
+            let file = document.getElementById('send-file').files[0].slice(0,500000, "image/png")
             
             if (message === '' && !file)
                 return;
@@ -112,9 +112,18 @@ class MessagesContainer extends React.Component {
             if(file) {
                 let reader = new FileReader()
                 reader.readAsDataURL(file)
+                document.getElementById('send-file').setAttribute('disabled', 'disabled')
+                document.getElementById('send-button').setAttribute('disabled', 'disabled')
                 reader.onload = () => {
                     let fileBuffer = reader.result;
-                    this.socket.emit('image', { image: true, buffer: fileBuffer.toString('base64')});
+                    this.socket.emit('image', { image: true, buffer: fileBuffer}, (error) => {
+                        console.log('image upload completed from client');
+                        document.getElementById('send-file').removeAttribute('disabled')
+                        document.getElementById('send-button').removeAttribute('disabled')
+                        if(error) {
+                            return console.log(error)
+                        }
+                    });
                 }
 
                 document.getElementById('send-file').value = ''

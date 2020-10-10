@@ -124,12 +124,13 @@ io.on('connection', (socket) => {
         callback()
     })
 
-    socket.on('image', ({image, buffer}) => {
+    socket.on('image', ({image, buffer}, callback) => {
 
         const user = getUser(socket.id)
         if(!user)
-            return;
+            return callback('User not found!');
         io.to(user.room).emit('message', {image, ...generateMessage(user.username, buffer)})
+        callback()
     })
     
     socket.on('sendLocation', ({latitude, longitude}, callback) => {
