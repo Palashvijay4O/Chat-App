@@ -15,7 +15,10 @@ const port = process.env.PORT || 3000
 
 const app = express()
 const server = http.createServer(app)
-const io = socketio(server)
+const io = socketio(server, {
+    pingTimeout: 10000,
+    pingInterval: 2000
+})
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true })); 
@@ -129,7 +132,7 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id)
         if(!user)
             return callback('User not found!');
-        io.to(user.room).emit('message', {image, ...generateMessage(user.username, buffer)})
+        io.to(user.room).binary(true).emit('message', {image, ...generateMessage(user.username, buffer)})
         callback()
     })
     
