@@ -116,7 +116,8 @@ class MessagesContainer extends React.Component {
                 document.getElementById('send-button').setAttribute('disabled', 'disabled')
                 reader.onload = () => {
                     let fileBuffer = reader.result;
-                    this.socket.emit('image', { image: true, buffer: fileBuffer}, (error) => {
+                    // this part takes time
+                    this.socket.binary(true).emit('image', { image: true, buffer: fileBuffer}, (error) => {
                         console.log('image upload completed from client');
                         document.getElementById('send-file').removeAttribute('disabled')
                         document.getElementById('send-button').removeAttribute('disabled')
