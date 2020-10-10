@@ -1,13 +1,9 @@
 import React from 'react';
 import Toast from 'react-bootstrap/Toast'
-import ToastHeader from 'react-bootstrap/ToastHeader'
-
 //import { ToastContainer, toast } from 'react-toastify';
 //import 'react-toastify/dist/ReactToastify.css';
 //toast.configure()
 
-// import UIfx from 'uifx';
-// import mp3File from './../../sounds/juntos.mp3';
 const isMobileAgent = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
 // function swipedetect(el, callback){
   
@@ -86,12 +82,14 @@ class MessagesContainer extends React.Component {
                 this.setState({notificationState: {'show': true, 'display' : 'block'}})
             }
             const messageObj = {
+                id: message.id,
                 username: message.username,
                 text: message.text,
+                image: message.image,
                 createdAt: moment(message.createdAt).format('h:mm a')
             }
-
             this.setState({
+                //[id] : messageObj
                 messages: [...this.state.messages, messageObj]
             })
             this.autoScroll()
@@ -104,22 +102,41 @@ class MessagesContainer extends React.Component {
         this.handleSend = event => {
             event.preventDefault()
             let message = event.target.elements.messageTxt.value;
-            if (message === '')
+            let file = document.getElementById('send-file').files[0]
+            
+            if (message === '' && !file)
                 return;
-            document.getElementById('send-button').setAttribute('disabled', 'disabled')
-            this.socket.emit('sendMessage', message, (error) => {
-                document.getElementById('send-button').removeAttribute('disabled')
-                document.querySelector('#message-box').value = '';
-
-                if(isMobileAgent)
-                    document.activeElement.blur()
-                else
-                    document.querySelector('#message-box').focus()
-                 
-                if(error) {
-                    return console.log(error)
+            
+            // Sending file from here
+            
+            if(file) {
+                let reader = new FileReader()
+                reader.readAsDataURL(file)
+                reader.onload = () => {
+                    let fileBuffer = reader.result;
+                    this.socket.emit('image', { image: true, buffer: fileBuffer.toString('base64')});
                 }
-            });
+
+                document.getElementById('send-file').value = ''
+            }
+
+            if(message !== '') {
+                document.getElementById('send-button').setAttribute('disabled', 'disabled')
+                this.socket.emit('sendMessage', message, (error) => {
+                    document.getElementById('send-button').removeAttribute('disabled')
+                    document.querySelector('#message-box').value = '';
+
+                    if(isMobileAgent)
+                        document.activeElement.blur()
+                    else
+                        document.querySelector('#message-box').focus()
+                    
+                    if(error) {
+                        return console.log(error)
+                    }
+                });
+            }
+            
         }
 
         this.timeout = (emitEvent, ms) => {
@@ -215,6 +232,10 @@ class MessagesContainer extends React.Component {
         }
     }
 
+    getImgSrc(src) {
+        return src.toString('base64');
+    }
+    
     render() {
         return (
             <div id="chat-main" className="chat__main">
@@ -235,7 +256,9 @@ class MessagesContainer extends React.Component {
                                         <span className="message__name">{message.username}</span>
                                         <span className="message__meta">{message.createdAt}</span>
                                     </p>
-                                    {message.text ? <p>{message.text}</p> : ''}
+                                    {message.text && message.image ? <img className={isMobileAgent ? 'img-mob' : 'img-desk'} src={this.getImgSrc(message.text)}></img> : ''}
+                                    {message.text && !message.image ? <p>{message.text}</p> : ''}
+                                    
                                 </div>
                             )
                         })}
@@ -249,9 +272,17 @@ class MessagesContainer extends React.Component {
                     </div>
                             
                     <div className="compose">
-                        <form id="message-form" onSubmit={this.handleSend}>
-                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." required autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
+                        <form id="message-form" onSubmit={this.handleSend} encType="multipart/form-data">
+                            <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
                             <button id="send-button" className="send-button"></button>
+                            <input type="file" id="send-file" name="send-file" className="attachFile"/>
+                            {/* <div style={{display : 'block', flexGrow: 1}}>
+                                <div style={{display : 'flex'}}>
+                                    <input id="message-box" type="text" name="messageTxt" placeholder="Type your message..." autoComplete="off" onKeyDown={this.handleKeyDown} onKeyUp={this.handleKeyUp}></input>
+                                    <button id="send-button" className="send-button"></button>
+                                </div>
+                                <input type="file" id="send-file" name="send-file" className="attachFile"/>
+                            </div> */}
                         </form>
                         {/* <!-- <button id="send-location">Share Location</button> --> */}
                     </div>

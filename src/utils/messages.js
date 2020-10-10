@@ -1,5 +1,8 @@
+let id = 0;
 const generateMessage = (username, text) => {
+    id += 1;
     return {
+        id,
         username,
         text,
         createdAt: new Date().getTime()
@@ -7,7 +10,9 @@ const generateMessage = (username, text) => {
 }
 
 const generateLocationMessage = (username, text) => {
+    id += 1;
     return {
+        id,
         username,
         text,
         createdAt: new Date().getTime()

@@ -11,10 +11,10 @@ ReactDOM.render(
 
 
 window.addEventListener('resize', () => { 
-    if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+    //if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
         document.querySelector(':root').style.setProperty('--vh', window.innerHeight/100 + 'px');
         document.querySelector(':root').style.setProperty('--vw', window.innerWidth/100 + 'px');
-    }
+    //}
 })
 
 $('#confirmDeletePopup .modal-footer button').on('click', (event) => {

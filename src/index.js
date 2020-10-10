@@ -124,6 +124,14 @@ io.on('connection', (socket) => {
         callback()
     })
 
+    socket.on('image', ({image, buffer}) => {
+
+        const user = getUser(socket.id)
+        if(!user)
+            return;
+        io.to(user.room).emit('message', {image, ...generateMessage(user.username, buffer)})
+    })
+    
     socket.on('sendLocation', ({latitude, longitude}, callback) => {
         const text = `https://google.com/maps?q=${latitude},${longitude}`
         
@@ -141,7 +149,7 @@ io.on('connection', (socket) => {
             io.to(user.room).emit('roomData', {
                 room: user.room,
                 users: getUsersInRoom(user.room)
-            })
+                })
 
             io.emit('roomList', {
                 rooms : getListOfActiveRooms()

@@ -58,8 +58,8 @@ class ChatContainer extends React.Component {
                     <Tab eventKey="chat" title="Chat" >
                         <MessagesContainer socket={this.socket}/>
                     </Tab>
-                    <Tab eventKey="settings" title="Preferences" disabled >
-                        <MessagesContainer socket={this.socket}/>
+                    <Tab eventKey="settings" title="Preferences">
+                        <div></div>
                     </Tab>
                     </Tabs>
                 </div>
